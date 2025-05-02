@@ -127,13 +127,14 @@ keys = [
     Key([], "XF86AudioNext", lazy.spawn("playerctl next"), desc='playerctl'),
     Key([], "XF86MonBrightnessUp", lazy.spawn("brightnessctl s 5%+"), desc='brightness UP'),
     Key([], "XF86MonBrightnessDown", lazy.spawn("brightnessctl s 5%-"), desc='brightness Down'),
-    
+
 ##Misc keybinds
     Key([], "Print", lazy.spawn("flameshot gui"), desc='Screenshot'),
     Key(["control"], "Print", lazy.spawn("flameshot full -c -p ~/Pictures/"), desc='Screenshot'),
     Key([mod], "e", lazy.spawn(filemanager), desc="Open file manager"),
     Key([mod], "s",toggle_sticky_windows(), desc="Toggle state of sticky for current window"),
-]   
+    Key([mod], "x", lazy.spawn("fish -c '~/.config/qtile/scripts/powermenu.sh'"), desc="Show power menu"),
+]
 
 # █▀▀ █▀█ █▀█ █░█ █▀█ █▀
 # █▄█ █▀▄ █▄█ █▄█ █▀▀ ▄█
@@ -166,17 +167,17 @@ layouts = [
     layout.Columns(
         margin = 0,
         border_focus = '#00DC6C',
-        border_normal = '#1F1D2E', 
+        border_normal = '#1F1D2E',
         border_width = 3,
     ),
-    
+
     layout.Max(
         border_focus = '#00DC6C',
         border_normal = '#1F1D2E',
         margin = 0,
         border_width = 0,
     ),
-    
+
     layout.Floating(
         border_focus = '#00DC6C',
         border_normal = '#1F1D2E',
@@ -192,7 +193,7 @@ layouts = [
         margin = 0,
         border_width = 3,
     ),
-     
+
     layout.MonadWide(
         border_focus = '#00DC6C',
         border_normal = '#1F1D2E',
@@ -225,19 +226,19 @@ def open_launcher():
 def open_btop():
     qtile.cmd_spawn("alacritty --hold -e btop")
 
-            
+
 # █▄▄ ▄▀█ █▀█
 # █▄█ █▀█ █▀▄
- 
+
 screens = [
     Screen(
         top = bar.Bar(
-            [   
+            [
                 widget.Spacer(
                     length = 18,
                     background = '#033C4B',
                 ),
-                
+
                 widget.Image(
                     filename = '~/.config/qtile/Assets/launch_Icon.png',
                     background = '#033C4B',
@@ -289,7 +290,7 @@ screens = [
                 ),
 
                 widget.Image(
-                    filename = '~/.config/qtile/Assets/5.png',                
+                    filename = '~/.config/qtile/Assets/5.png',
                 ),
 
                 widget.Image(
@@ -306,11 +307,11 @@ screens = [
                 ),
 
                 widget.Image(
-                    filename = '~/.config/qtile/Assets/5.png',                
-                ),  
+                    filename = '~/.config/qtile/Assets/5.png',
+                ),
 
                 widget.Image(
-                    filename = '~/.config/qtile/Assets/1.png',                
+                    filename = '~/.config/qtile/Assets/1.png',
                     background = '#52548D',
                 ),
 
@@ -329,10 +330,10 @@ screens = [
                 ),
 
                 widget.Image(
-                    filename = '~/.config/qtile/Assets/2.png',                
+                    filename = '~/.config/qtile/Assets/2.png',
                     background = '#52548D',
-                ),  
-  
+                ),
+
                 widget.Systray(
                     background = '#046F5F',
                     icon_size = 24,
@@ -344,15 +345,15 @@ screens = [
                 ),
 
                 widget.Image(
-                    filename = '~/.config/qtile/Assets/2.png',                
+                    filename = '~/.config/qtile/Assets/2.png',
                     background = '#52548D',
-                ),                    
-                                                
+                ),
+
                 widget.Spacer(
                     length = 0,
                     background = '#046f5f',
-                ),  
-               
+                ),
+
                 widget.Memory(
                     format = 'RAM:({MemUsed:.0f}MB/{MemTotal:.0f}MB)',
                     font = "IBM Plex Mono Medium",
@@ -365,7 +366,7 @@ screens = [
                 widget.Spacer(
                     length = 6,
                     background = '#046f5f',
-                ),  
+                ),
 
                 widget.Image(
                     filename = '~/.config/qtile/Assets/Bar-Icons/volume.svg',
@@ -378,8 +379,8 @@ screens = [
                 widget.Spacer(
                     length = 4,
                     background = '#046f5f',
-                ), 
-                
+                ),
+
                 widget.PulseVolume(
                     font= 'IBM Plex Mono Medium',
                     fontsize = 15,
@@ -389,11 +390,11 @@ screens = [
 
                 widget.Image(
                     filename = '~/.config/qtile/Assets/5.png',
-                ),                
+                ),
 
 
                 widget.Image(
-                    filename = '~/.config/qtile/Assets/1.png',                
+                    filename = '~/.config/qtile/Assets/1.png',
                     background = '#4B427E',
                 ),
 
@@ -407,8 +408,8 @@ screens = [
                 widget.Spacer(
                     length = 6,
                     background = '#046f5f',
-                ), 
-        
+                ),
+
                 widget.Clock(
                     format = '%d/%m/%y ', #Here you can change between USA or another timezone
                     background = '#046f5f',
@@ -426,7 +427,7 @@ screens = [
                 ),
 
                 widget.Clock(
-                    format = '%H:%M', 
+                    format = '%H:%M',
                     background = '#046f5f',
                     font = "IBM Plex Mono Medium",
                     fontsize = 15,
