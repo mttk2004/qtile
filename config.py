@@ -330,25 +330,6 @@ screens = [
                 ),
 
                 widget.Image(
-                    filename = '~/.config/qtile/Assets/1.png',
-                    background = '#52548D',
-                ),
-
-                widget.CPU(
-                    font = "IBM Plex Mono Medium",
-                    format='CPU:({load_percent:.1f}%/{freq_current}GHz)',
-                    fontsize = 15,
-                    margin = 0,
-                    padding = 0,
-                    background = '#046F5F',
-                    mouse_callbacks = {'Button1': open_btop},
-                ),
-
-                widget.Image(
-                    filename = '~/.config/qtile/Assets/5.png',
-                ),
-
-                widget.Image(
                     filename = '~/.config/qtile/Assets/2.png',
                     background = '#52548D',
                 ),
@@ -368,15 +349,40 @@ screens = [
                     background = '#52548D',
                 ),
 
-                # Alternative battery widget if Battery widget doesn't work
-                # widget.GenPollText(
-                #     background = '#046F5F',
-                #     font = "IBM Plex Mono Medium",
-                #     fontsize = 15,
-                #     func = get_battery_status,
-                #     padding = 0,
-                #     update_interval = 30,
-                # ),
+                widget.Spacer(
+                    length = 0,
+                    background = '#046f5f',
+                ),
+
+                # Nhóm thông tin hệ thống: CPU, RAM, Pin, Độ sáng, Âm lượng
+                widget.Memory(
+                    format = 'RAM:({MemUsed:.0f}MB/{MemTotal:.0f}MB)',
+                    font = "IBM Plex Mono Medium",
+                    fontsize = 15,
+                    padding = 0,
+                    background = '#046F5F',
+                    mouse_callbacks = {'Button1': open_btop},
+                ),
+
+                widget.Spacer(
+                    length = 6,
+                    background = '#046f5f',
+                ),
+
+                widget.CPU(
+                    font = "IBM Plex Mono Medium",
+                    format='CPU:({load_percent:.1f}%/{freq_current}GHz)',
+                    fontsize = 15,
+                    margin = 0,
+                    padding = 0,
+                    background = '#046F5F',
+                    mouse_callbacks = {'Button1': open_btop},
+                ),
+
+                widget.Spacer(
+                    length = 6,
+                    background = '#046f5f',
+                ),
 
                 widget.Battery(
                     background = '#046F5F',
@@ -392,24 +398,9 @@ screens = [
                     execute_polling = True,
                 ),
 
-                widget.Image(
-                    filename = '~/.config/qtile/Assets/5.png',
-                ),
-
-                widget.Image(
-                    filename = '~/.config/qtile/Assets/2.png',
-                    background = '#52548D',
-                ),
-
-                widget.Backlight(
-                    background = '#046F5F',
-                    font = "IBM Plex Mono Medium",
-                    fontsize = 15,
-                    backlight_name = 'amdgpu_bl0',
-                    format = '💡{percent:2.0%}',
-                    padding = 0,
-                    change_command='brightnessctl s {0}%',
-                    step = 5,
+                widget.Spacer(
+                    length = 6,
+                    background = '#046f5f',
                 ),
 
                 # Alternative brightness widget if Backlight widget doesn't work
@@ -422,27 +413,15 @@ screens = [
                 #     update_interval = 5,
                 # ),
 
-                widget.Image(
-                    filename = '~/.config/qtile/Assets/5.png',
-                ),
-
-                widget.Image(
-                    filename = '~/.config/qtile/Assets/2.png',
-                    background = '#52548D',
-                ),
-
-                widget.Spacer(
-                    length = 0,
-                    background = '#046f5f',
-                ),
-
-                widget.Memory(
-                    format = 'RAM:({MemUsed:.0f}MB/{MemTotal:.0f}MB)',
+                widget.Backlight(
+                    background = '#046F5F',
                     font = "IBM Plex Mono Medium",
                     fontsize = 15,
+                    backlight_name = 'amdgpu_bl0',
+                    format = '💡{percent:2.0%}',
                     padding = 0,
-                    background = '#046F5F',
-                    mouse_callbacks = {'Button1': open_btop},
+                    change_command='brightnessctl s {0}%',
+                    step = 5,
                 ),
 
                 widget.Spacer(
