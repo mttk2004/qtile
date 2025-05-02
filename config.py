@@ -29,6 +29,7 @@ from libqtile.config import Click, Drag, Group, Key, Match, hook, Screen, KeyCho
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
 from libqtile.dgroups import simple_key_binder
+import subprocess
 
 
 mod = "mod4" #aka Windows key
@@ -226,6 +227,24 @@ def open_launcher():
 def open_btop():
     qtile.cmd_spawn("alacritty --hold -e btop")
 
+def get_battery_status():
+    try:
+        output = subprocess.check_output(["acpi", "-b"]).decode().strip()
+        percentage = output.split(", ")[1].rstrip("%")
+        if "Charging" in output:
+            return f"🔌 {percentage}%"
+        else:
+            return f"🔋 {percentage}%"
+    except:
+        return "🔋 N/A"
+
+def get_brightness():
+    try:
+        output = subprocess.check_output(["brightnessctl", "info"]).decode().strip()
+        percentage = output.split("(")[1].split("%")[0]
+        return f"💡 {percentage}%"
+    except:
+        return "💡 N/A"
 
 # █▄▄ ▄▀█ █▀█
 # █▄█ █▀█ █▀▄
@@ -339,6 +358,69 @@ screens = [
                     icon_size = 24,
                     padding = 3,
                 ),
+
+                widget.Image(
+                    filename = '~/.config/qtile/Assets/5.png',
+                ),
+
+                widget.Image(
+                    filename = '~/.config/qtile/Assets/2.png',
+                    background = '#52548D',
+                ),
+
+                # Alternative battery widget if Battery widget doesn't work
+                # widget.GenPollText(
+                #     background = '#046F5F',
+                #     font = "IBM Plex Mono Medium",
+                #     fontsize = 15,
+                #     func = get_battery_status,
+                #     padding = 0,
+                #     update_interval = 30,
+                # ),
+
+                widget.Battery(
+                    background = '#046F5F',
+                    font = "IBM Plex Mono Medium",
+                    fontsize = 15,
+                    format = '🔋{percent:2.0%}',
+                    padding = 0,
+                    charge_char = '🔌',
+                    discharge_char = '🔋',
+                    update_interval = 30,
+                    show_short_text = False,
+                    battery_name = 'BAT0',
+                    execute_polling = True,
+                ),
+
+                widget.Image(
+                    filename = '~/.config/qtile/Assets/5.png',
+                ),
+
+                widget.Image(
+                    filename = '~/.config/qtile/Assets/2.png',
+                    background = '#52548D',
+                ),
+
+                widget.Backlight(
+                    background = '#046F5F',
+                    font = "IBM Plex Mono Medium",
+                    fontsize = 15,
+                    backlight_name = 'amdgpu_bl0',
+                    format = '💡{percent:2.0%}',
+                    padding = 0,
+                    change_command='brightnessctl s {0}%',
+                    step = 5,
+                ),
+
+                # Alternative brightness widget if Backlight widget doesn't work
+                # widget.GenPollText(
+                #     background = '#046F5F',
+                #     font = "IBM Plex Mono Medium",
+                #     fontsize = 15,
+                #     func = get_brightness,
+                #     padding = 0,
+                #     update_interval = 5,
+                # ),
 
                 widget.Image(
                     filename = '~/.config/qtile/Assets/5.png',
