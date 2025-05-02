@@ -5,6 +5,7 @@ mod = "mod4" # Windows key
 mod1 = "mod1" # Alt key
 terminal = "alacritty"
 filemanager = "thunar"
+app_launcher = "rofi -theme rounded-green-dark -show drun"  # Lệnh mở menu drun
 
 # Appearance
 font_family = "IBM Plex Mono Medium"

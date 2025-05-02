@@ -1,11 +1,11 @@
 from libqtile import widget, qtile
 import subprocess
 
-from modules.settings import theme, font_family, font_size, default_font, default_fontsize, assets_dir, icons_dir
+from modules.settings import theme, font_family, font_size, default_font, default_fontsize, assets_dir, icons_dir, app_launcher
 
 # Utility functions
 def open_launcher():
-    qtile.cmd_spawn("rofi -theme rounded-green-dark -show drun")
+    qtile.cmd_spawn(app_launcher)
 
 def open_btop():
     qtile.cmd_spawn("alacritty --hold -e btop")

@@ -1,7 +1,7 @@
 from libqtile.config import Key, KeyChord
 from libqtile.lazy import lazy
 
-from modules.settings import mod, mod1, terminal, filemanager, powermenu_script
+from modules.settings import mod, mod1, terminal, filemanager, powermenu_script, app_launcher
 
 # Sticky windows
 sticky_windows = []
@@ -60,8 +60,7 @@ def init_keys():
         Key([mod], "q", lazy.window.kill(), desc="Kill focused window"),
         Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
         Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
-        Key([mod1], "Space", lazy.spawn("rofi -theme rounded-green-dark -show drun"), desc="Spawn rofi"),
-
+        Key([mod], "d", lazy.spawn(app_launcher), desc="Open application launcher"),
 
     ##CUSTOM
         Key([], "XF86AudioRaiseVolume", lazy.spawn("pactl set-sink-volume 0 +1%"), desc='Volume Up'),
