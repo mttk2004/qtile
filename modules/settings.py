@@ -37,3 +37,6 @@ icons_dir = f"{assets_dir}Bar-Icons/"
 scripts_dir = "~/.config/qtile/scripts/"
 powermenu_script = f"{scripts_dir}powermenu.sh"
 autostart_script = f"{scripts_dir}autostart.sh"
+
+# Redshift settings
+redshift_temp_night = 4500  # Nhiệt độ màu ban đêm (Kelvin)
