@@ -1,7 +1,7 @@
 from libqtile.config import Key, KeyChord
 from libqtile.lazy import lazy
 
-from modules.settings import mod, mod1, terminal, filemanager, powermenu_script, app_launcher
+from modules.settings import mod, mod1, terminal, filemanager, powermenu_script, app_launcher, gpu_screen_recorder
 
 # Sticky windows
 sticky_windows = []
