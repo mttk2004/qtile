@@ -6,6 +6,7 @@ mod1 = "mod1" # Alt key
 terminal = "alacritty"
 filemanager = "thunar"
 app_launcher = "rofi -theme rounded-green-dark -show drun"  # Lệnh mở menu drun
+gpu_screen_recorder = "flatpak run com.dec05eba.gpu_screen_recorder"
 
 # Appearance
 font_family = "IBM Plex Mono Medium"

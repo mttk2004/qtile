@@ -102,5 +102,6 @@ def init_keys():
         Key([mod], "e", lazy.spawn(filemanager), desc="Open file manager"),
         Key([mod], "s", toggle_sticky_windows(), desc="Toggle state of sticky for current window"),
         Key([mod], "x", lazy.spawn(f"fish -c '{powermenu_script}'"), desc="Show power menu"),
+        Key([mod], "g", lazy.spawn(gpu_screen_recorder), desc="Open GPU Screen Recorder"),
     ]
     return keys
