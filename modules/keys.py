@@ -36,6 +36,31 @@ def switch_to_next_group(qtile):
     else:
         qtile.current_screen.set_group(qtile.groups[current_group_index + 1])
 
+@lazy.function
+def toggle_floating_centered(qtile):
+    """Chuyển cửa sổ hiện tại sang floating mode và căn giữa với kích thước 80%"""
+    window = qtile.current_window
+    if window:
+        # Chuyển sang floating mode
+        window.toggle_floating()
+
+        # Lấy kích thước màn hình
+        screen = qtile.current_screen
+        screen_width = screen.width
+        screen_height = screen.height
+
+        # Tính toán kích thước mới (80% của màn hình)
+        new_width = int(screen_width * 0.8)
+        new_height = int(screen_height * 0.8)
+
+        # Tính toán vị trí để căn giữa
+        x = (screen_width - new_width) // 2
+        y = (screen_height - new_height) // 2
+
+        # Áp dụng kích thước và vị trí mới
+        window.cmd_set_size_floating(new_width, new_height)
+        window.cmd_set_position_floating(x, y)
+
 def init_keys():
     keys = [
         # A list of available commands that can be bound to keys can be found
@@ -65,6 +90,7 @@ def init_keys():
         Key([mod], "n", lazy.layout.normalize(), desc="Reset all window sizes"),
         Key([mod], "f", lazy.window.toggle_fullscreen(), desc="Toggle focused window to fullscreen"),
         Key([mod], "v", lazy.window.toggle_floating(), desc="Toggle focused window to floating"),
+        Key([mod, "shift"], "v", toggle_floating_centered(), desc="Toggle focused window to floating and center it"),
         # Toggle between split and unsplit sides of stack.
         # Split = all windows displayed
         # Unsplit = 1 window displayed, like Max layout, but still with
