@@ -6,6 +6,8 @@ mod1 = "mod1" # Alt key
 terminal = "alacritty"
 filemanager = "thunar"
 app_launcher = "rofi -theme rounded-green-dark -show drun"  # Lệnh mở menu drun
+
+# GPU Screen Recorder
 gpu_screen_recorder = "flatpak run com.dec05eba.gpu_screen_recorder"
 
 # Appearance
@@ -38,6 +40,7 @@ icons_dir = f"{assets_dir}Bar-Icons/"
 # Scripts paths
 scripts_dir = "~/.config/qtile/scripts/"
 powermenu_script = f"{scripts_dir}powermenu.sh"
+ksnipmenu_script = f"{scripts_dir}ksnipmenu.sh"
 autostart_script = f"{scripts_dir}autostart.sh"
 
 # Redshift settings

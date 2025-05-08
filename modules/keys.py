@@ -1,7 +1,7 @@
 from libqtile.config import Key, KeyChord
 from libqtile.lazy import lazy
 
-from modules.settings import mod, mod1, terminal, filemanager, powermenu_script, app_launcher, gpu_screen_recorder
+from modules.settings import mod, mod1, terminal, filemanager, powermenu_script, app_launcher, gpu_screen_recorder, ksnipmenu_script
 
 # Sticky windows
 sticky_windows = []
@@ -97,8 +97,7 @@ def init_keys():
         Key([], "XF86MonBrightnessDown", lazy.spawn("brightnessctl s 5%-"), desc='brightness Down'),
 
     ##Misc keybinds
-        Key([], "Print", lazy.spawn("flameshot gui"), desc='Screenshot'),
-        Key(["control"], "Print", lazy.spawn("flameshot full -c -p ~/Pictures/"), desc='Screenshot'),
+        Key([mod, "control"], "p", lazy.spawn(f"fish -c '{ksnipmenu_script}'"), desc='Screenshot Menu'),
         Key([mod], "e", lazy.spawn(filemanager), desc="Open file manager"),
         Key([mod], "s", toggle_sticky_windows(), desc="Toggle state of sticky for current window"),
         Key([mod], "x", lazy.spawn(f"fish -c '{powermenu_script}'"), desc="Show power menu"),

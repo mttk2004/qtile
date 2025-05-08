@@ -1,33 +1,33 @@
-#!/bin/bash
+#!/bin/fish
 
 # Đọc nhiệt độ màu từ file cấu hình
-CONFIG_FILE="$HOME/.config/qtile/modules/settings.py"
-TEMP_NIGHT=4500 # Giá trị mặc định
+set CONFIG_FILE "$HOME/.config/qtile/modules/settings.py"
+set TEMP_NIGHT 4500 # Giá trị mặc định
 
-if [ -f "$CONFIG_FILE" ]; then
+if test -f "$CONFIG_FILE"
     # Lấy giá trị từ file cấu hình
-    TEMP_VALUE=$(grep "redshift_temp_night" "$CONFIG_FILE" | grep -o '[0-9]\+')
-    if [ ! -z "$TEMP_VALUE" ]; then
-        TEMP_NIGHT=$TEMP_VALUE
-    fi
-fi
+    set TEMP_VALUE (grep "redshift_temp_night" "$CONFIG_FILE" | grep -o '[0-9]\+')
+    if test -n "$TEMP_VALUE"
+        set TEMP_NIGHT $TEMP_VALUE
+    end
+end
 
 # Lấy giờ hiện tại (định dạng 24 giờ)
-CURRENT_HOUR=$(date +%H)
+set CURRENT_HOUR (date +%H)
 
 # Kiểm tra xem có phải ban đêm không (từ 18:00 tối đến 6:00 sáng)
-if [ "$CURRENT_HOUR" -ge 18 ] || [ "$CURRENT_HOUR" -lt 6 ]; then
+if test $CURRENT_HOUR -ge 18 -o $CURRENT_HOUR -lt 6
     # Kiểm tra xem redshift đã chạy chưa
-    if ! pgrep -x "redshift" > /dev/null; then
+    if not pgrep -x "redshift" > /dev/null
         # Nếu chưa chạy, khởi động redshift với nhiệt độ màu cấu hình
-        redshift -O ${TEMP_NIGHT}K &
+        redshift -O {$TEMP_NIGHT}K &
     else
         # Nếu đã chạy, thiết lập lại nhiệt độ màu
-        redshift -O ${TEMP_NIGHT}K &
-    fi
+        redshift -O {$TEMP_NIGHT}K &
+    end
 else
     # Ban ngày, thiết lập lại nhiệt độ màu mặc định (6500K)
-    if pgrep -x "redshift" > /dev/null; then
+    if pgrep -x "redshift" > /dev/null
         redshift -x
-    fi
-fi
+    end
+end
