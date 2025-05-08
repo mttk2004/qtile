@@ -11,7 +11,7 @@ app_launcher = "rofi -theme rounded-green-dark -show drun"  # Lệnh mở menu d
 gpu_screen_recorder = "flatpak run com.dec05eba.gpu_screen_recorder"
 
 # Appearance
-font_family = "IBM Plex Mono Medium"
+font_family = "CaskaydiaCove Nerd Font SemiBold"
 font_size = 15
 default_font = "sans"
 default_fontsize = 12
