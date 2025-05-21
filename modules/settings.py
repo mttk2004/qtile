@@ -5,6 +5,9 @@ File này chứa tất cả các biến cấu hình được sử dụng trong t
 giúp tập trung quản lý và dễ dàng thay đổi khi cần.
 """
 
+from typing import List, Dict, Any, Union
+from libqtile.core.manager import Qtile
+
 # -----------------------------------------------------
 # SYSTEM SETTINGS - Cài đặt hệ thống
 # -----------------------------------------------------
@@ -98,7 +101,7 @@ REDSHIFT_TEMP_NIGHT = 4500  # Nhiệt độ màu ban đêm (Kelvin)
 REDSHIFT_TEMP_DAY = 6500  # Nhiệt độ màu ban ngày (Kelvin)
 
 # Sticky window settings
-STICKY_WINDOWS = []  # Danh sách cửa sổ sticky
+STICKY_WINDOWS: List[Any] = []  # Danh sách cửa sổ sticky
 
 # -----------------------------------------------------
 # BACKWARD COMPATIBILITY - Tương thích ngược với code cũ
@@ -143,7 +146,7 @@ sticky_windows = STICKY_WINDOWS
 
 # Bảng màu chính (sử dụng từ themes/colors.py)
 # Được giữ lại để tương thích với code cũ
-theme = {
+theme: Dict[str, str] = {
     "background": "#033C4B",
     "foreground": "#046F5F",
     "focus": "#00DC6C",
