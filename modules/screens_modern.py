@@ -17,13 +17,15 @@ def init_screens():
 
     Hỗ trợ nhiều màn hình với cấu hình khác nhau.
     """
+    # Điều chỉnh kích thước thanh bar
+    bar_size = 36  # Tăng kích thước thanh bar để phù hợp với font lớn hơn
+
     # Cấu hình thanh bar hiện đại
     bar_config = {
-        "size": bar_height,
+        "size": bar_size,
         "background": colors["bg"],
         "margin": [4, 6, 0, 6],  # [Top, Right, Bottom, Left]
-        "border_width": [0, 0, 2, 0],  # [Top, Right, Bottom, Left]
-        "border_color": colors["green_accent"],
+        "border_width": [0, 0, 0, 0],  # [Top, Right, Bottom, Left] - Tắt border
     }
 
     # Danh sách màn hình
