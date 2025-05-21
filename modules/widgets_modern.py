@@ -10,42 +10,42 @@ import subprocess
 import os
 
 from themes.colors import colors
-from modules.settings import font_family, terminal, app_launcher, scripts_dir, icons_dir
+from modules.settings import (
+    FONT_FAMILY, FONT_SIZE, ICON_SIZE, TERMINAL, APP_LAUNCHER, SCRIPTS_DIR, ICONS_DIR,
+    WIDGET_PADDING, WIDGET_PADDING_SMALL, WIDGET_GROUPBOX_FONTSIZE, WIDGET_SEPARATOR_LINEWIDTH,
+    WIDGET_UPDATE_INTERVAL, WIDGET_BATTERY_UPDATE_INTERVAL, WIDGET_MAX_CHARS, SYSTRAY_ICON_SIZE
+)
 
 # Đường dẫn đến thư mục icons
-ICONS_DIR = os.path.expanduser(icons_dir)
-
-# Điều chỉnh kích thước font
-FONT_SIZE = 18  # Tăng kích thước font lên 18
-ICON_SIZE = 24  # Tăng kích thước icon lên 24
+ICONS_PATH = os.path.expanduser(ICONS_DIR)
 
 # Utility functions
 def open_launcher():
     """Mở app launcher."""
-    qtile.cmd_spawn(app_launcher)
+    qtile.cmd_spawn(APP_LAUNCHER)
 
 def open_terminal():
     """Mở terminal."""
-    qtile.cmd_spawn(terminal)
+    qtile.cmd_spawn(TERMINAL)
 
 def open_btop():
     """Mở btop trong terminal."""
-    qtile.cmd_spawn(f"{terminal} --hold -e btop")
+    qtile.cmd_spawn(f"{TERMINAL} --hold -e btop")
 
 def open_powermenu():
     """Mở power menu."""
-    qtile.cmd_spawn(f"{scripts_dir}powermenu.sh")
+    qtile.cmd_spawn(f"{SCRIPTS_DIR}powermenu.sh")
 
 def open_screenshot_menu():
     """Mở menu chụp màn hình."""
-    qtile.cmd_spawn(f"{scripts_dir}ksnipmenu.sh")
+    qtile.cmd_spawn(f"{SCRIPTS_DIR}ksnipmenu.sh")
 
 def init_widgets_defaults():
     """Khởi tạo các giá trị mặc định cho widgets."""
     return dict(
-        font=font_family,
+        font=FONT_FAMILY,
         fontsize=FONT_SIZE,
-        padding=12,  # Tăng padding
+        padding=WIDGET_PADDING,
         background=colors["bg"],
         foreground=colors["fg"],
     )
@@ -58,20 +58,20 @@ def init_widgets_list():
             text=" ",  # Icon cho menu (nếu có font awesome)
             foreground=colors["green_accent"],
             fontsize=ICON_SIZE,
-            padding=14,
+            padding=WIDGET_PADDING,
             mouse_callbacks={'Button1': open_launcher},
         ),
 
         # Separator
         widget.Sep(
             linewidth=0,
-            padding=14,
+            padding=WIDGET_PADDING,
         ),
 
         # Group Box - Hiển thị các workspace
         widget.GroupBox(
-            font=font_family,
-            fontsize=20,  # Tăng kích thước font cho GroupBox lên 20
+            font=FONT_FAMILY,
+            fontsize=WIDGET_GROUPBOX_FONTSIZE,
             margin_y=5,
             margin_x=6,
             padding_y=8,
@@ -94,49 +94,49 @@ def init_widgets_list():
         # Separator
         widget.Sep(
             linewidth=0,
-            padding=14,
+            padding=WIDGET_PADDING,
         ),
 
         # Current Layout Icon
         widget.CurrentLayoutIcon(
-            scale=0.75,  # Tăng kích thước icon
+            scale=0.75,
             padding=0,
         ),
 
         # Current Layout
         widget.CurrentLayout(
-            padding=10,
+            padding=WIDGET_PADDING_SMALL,
             foreground=colors["green_light"],
             fontsize=FONT_SIZE,
         ),
 
         # Separator
         widget.Sep(
-            linewidth=1,
-            padding=14,
+            linewidth=WIDGET_SEPARATOR_LINEWIDTH,
+            padding=WIDGET_PADDING,
             foreground=colors["inactive"],
         ),
 
         # Window Name
         widget.WindowName(
             format="{name}",
-            max_chars=50,
+            max_chars=WIDGET_MAX_CHARS,
             empty_group_string="Desktop",
             foreground=colors["fg"],
-            padding=14,
+            padding=WIDGET_PADDING,
             fontsize=FONT_SIZE,
         ),
 
         # Systray
         widget.Systray(
-            icon_size=24,  # Tăng kích thước icon lên 24
-            padding=14,
+            icon_size=SYSTRAY_ICON_SIZE,
+            padding=WIDGET_PADDING,
         ),
 
         # Separator
         widget.Sep(
             linewidth=0,
-            padding=14,
+            padding=WIDGET_PADDING,
         ),
 
         # CPU Widget với icon
@@ -149,8 +149,8 @@ def init_widgets_list():
         widget.CPU(
             format="{load_percent:.0f}%",
             foreground=colors["fg"],
-            padding=10,
-            update_interval=2.0,
+            padding=WIDGET_PADDING_SMALL,
+            update_interval=WIDGET_UPDATE_INTERVAL,
             mouse_callbacks={'Button1': open_btop},
             fontsize=FONT_SIZE,
         ),
@@ -160,13 +160,13 @@ def init_widgets_list():
             text="󰍛",  # Icon RAM (nếu có font awesome)
             foreground=colors["green_primary"],
             fontsize=ICON_SIZE,
-            padding=14,
+            padding=WIDGET_PADDING,
         ),
         widget.Memory(
             format="{MemUsed:.0f}MB",
             foreground=colors["fg"],
-            padding=10,
-            update_interval=2.0,
+            padding=WIDGET_PADDING_SMALL,
+            update_interval=WIDGET_UPDATE_INTERVAL,
             mouse_callbacks={'Button1': open_btop},
             fontsize=FONT_SIZE,
         ),
@@ -176,17 +176,17 @@ def init_widgets_list():
             text="󰁹",  # Icon Pin (nếu có font awesome)
             foreground=colors["green_primary"],
             fontsize=ICON_SIZE,
-            padding=14,
+            padding=WIDGET_PADDING,
         ),
         widget.Battery(
             format="{percent:2.0%}",
             foreground=colors["fg"],
-            padding=10,
-            update_interval=30,
+            padding=WIDGET_PADDING_SMALL,
+            update_interval=WIDGET_BATTERY_UPDATE_INTERVAL,
             charge_char="󰂄",
             discharge_char="󰂃",
             full_char="󰁹",
-            empty_char="��",
+            empty_char="󰂎",
             show_short_text=False,
             low_foreground=colors["warning"],
             low_percentage=0.15,
@@ -198,11 +198,11 @@ def init_widgets_list():
             text="󰕾",  # Icon Volume (nếu có font awesome)
             foreground=colors["green_primary"],
             fontsize=ICON_SIZE,
-            padding=14,
+            padding=WIDGET_PADDING,
         ),
         widget.PulseVolume(
             foreground=colors["fg"],
-            padding=10,
+            padding=WIDGET_PADDING_SMALL,
             limit_max_volume=True,
             fontsize=FONT_SIZE,
         ),
@@ -212,13 +212,13 @@ def init_widgets_list():
             text="󰃠",  # Icon Brightness (nếu có font awesome)
             foreground=colors["green_primary"],
             fontsize=ICON_SIZE,
-            padding=14,
+            padding=WIDGET_PADDING,
         ),
         widget.Backlight(
             backlight_name="amdgpu_bl0",
             format="{percent:2.0%}",
             foreground=colors["fg"],
-            padding=10,
+            padding=WIDGET_PADDING_SMALL,
             change_command="brightnessctl s {0}%",
             step=5,
             fontsize=FONT_SIZE,
@@ -226,8 +226,8 @@ def init_widgets_list():
 
         # Separator
         widget.Sep(
-            linewidth=1,
-            padding=14,
+            linewidth=WIDGET_SEPARATOR_LINEWIDTH,
+            padding=WIDGET_PADDING,
             foreground=colors["inactive"],
         ),
 
@@ -236,12 +236,12 @@ def init_widgets_list():
             text="󰸗",  # Icon Calendar (nếu có font awesome)
             foreground=colors["green_primary"],
             fontsize=ICON_SIZE,
-            padding=14,
+            padding=WIDGET_PADDING,
         ),
         widget.Clock(
             format="%d/%m/%y",
             foreground=colors["fg"],
-            padding=10,
+            padding=WIDGET_PADDING_SMALL,
             fontsize=FONT_SIZE,
         ),
 
@@ -250,19 +250,19 @@ def init_widgets_list():
             text="󰥔",  # Icon Clock (nếu có font awesome)
             foreground=colors["green_primary"],
             fontsize=ICON_SIZE,
-            padding=14,
+            padding=WIDGET_PADDING,
         ),
         widget.Clock(
             format="%H:%M",
             foreground=colors["fg"],
-            padding=10,
+            padding=WIDGET_PADDING_SMALL,
             fontsize=FONT_SIZE,
         ),
 
         # Separator
         widget.Sep(
             linewidth=0,
-            padding=14,
+            padding=WIDGET_PADDING,
         ),
 
         # Power Menu Button
@@ -270,7 +270,7 @@ def init_widgets_list():
             text="⏻",  # Icon Power (nếu có font awesome)
             foreground=colors["error"],
             fontsize=ICON_SIZE,
-            padding=14,
+            padding=WIDGET_PADDING,
             mouse_callbacks={'Button1': open_powermenu},
         ),
     ]

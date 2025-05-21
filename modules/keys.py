@@ -1,19 +1,24 @@
 from libqtile.config import Key, KeyChord
 from libqtile.lazy import lazy
 
-from modules.settings import mod, mod1, terminal, filemanager, powermenu_script, app_launcher, gpu_screen_recorder, ksnipmenu_script
+from modules.settings import (
+    MOD, MOD_ALT, TERMINAL, FILEMANAGER, POWERMENU_SCRIPT,
+    APP_LAUNCHER, GPU_SCREEN_RECORDER, KSNIPMENU_SCRIPT,
+    STICKY_WINDOWS
+)
 
-# Sticky windows
-sticky_windows: list = []
+# Backward compatibility
+mod = MOD
+mod1 = MOD_ALT
 
 @lazy.function
 def toggle_sticky_windows(qtile, window=None):
     if window is None:
         window = qtile.current_screen.group.current_window
-    if window in sticky_windows:
-        sticky_windows.remove(window)
+    if window in STICKY_WINDOWS:
+        STICKY_WINDOWS.remove(window)
     else:
-        sticky_windows.append(window)
+        STICKY_WINDOWS.append(window)
     return window
 
 @lazy.function
@@ -41,50 +46,50 @@ def init_keys():
         # A list of available commands that can be bound to keys can be found
         # at https://docs.qtile.org/en/latest/manual/config/lazy.html
         # Switch between windows
-        Key([mod], "Left", lazy.layout.left(), desc="Move focus to left"),
-        Key([mod], "Right", lazy.layout.right(), desc="Move focus to right"),
-        Key([mod], "Down", lazy.layout.down(), desc="Move focus down"),
-        Key([mod], "Up", lazy.layout.up(), desc="Move focus up"),
-        Key([mod], "h", lazy.layout.left(), desc="Move focus to left"),
-        Key([mod], "l", lazy.layout.right(), desc="Move focus to right"),
-        Key([mod], "j", lazy.layout.down(), desc="Move focus down"),
-        Key([mod], "k", lazy.layout.up(), desc="Move focus up"),
-        Key([mod], "space", lazy.layout.next(), desc="Move window focus to other window"),
+        Key([MOD], "Left", lazy.layout.left(), desc="Move focus to left"),
+        Key([MOD], "Right", lazy.layout.right(), desc="Move focus to right"),
+        Key([MOD], "Down", lazy.layout.down(), desc="Move focus down"),
+        Key([MOD], "Up", lazy.layout.up(), desc="Move focus up"),
+        Key([MOD], "h", lazy.layout.left(), desc="Move focus to left"),
+        Key([MOD], "l", lazy.layout.right(), desc="Move focus to right"),
+        Key([MOD], "j", lazy.layout.down(), desc="Move focus down"),
+        Key([MOD], "k", lazy.layout.up(), desc="Move focus up"),
+        Key([MOD], "space", lazy.layout.next(), desc="Move window focus to other window"),
         # Move windows between left/right columns or move up/down in current stack.
         # Moving out of range in Columns layout will create new column.
-        Key([mod, "shift"], "h", lazy.layout.shuffle_left(), desc="Move window to the left"),
-        Key([mod, "shift"], "l", lazy.layout.shuffle_right(), desc="Move window to the right"),
-        Key([mod, "shift"], "j", lazy.layout.shuffle_down(), desc="Move window down"),
-        Key([mod, "shift"], "k", lazy.layout.shuffle_up(), desc="Move window up"),
+        Key([MOD, "shift"], "h", lazy.layout.shuffle_left(), desc="Move window to the left"),
+        Key([MOD, "shift"], "l", lazy.layout.shuffle_right(), desc="Move window to the right"),
+        Key([MOD, "shift"], "j", lazy.layout.shuffle_down(), desc="Move window down"),
+        Key([MOD, "shift"], "k", lazy.layout.shuffle_up(), desc="Move window up"),
         # Grow windows. If current window is on the edge of screen and direction
         # will be to screen edge - window would shrink.
-        Key([mod, "control"], "h", lazy.layout.grow_left(), desc="Grow window to the left"),
-        Key([mod, "control"], "l", lazy.layout.grow_right(), desc="Grow window to the right"),
-        Key([mod, "control"], "j", lazy.layout.grow_down(), desc="Grow window down"),
-        Key([mod, "control"], "k", lazy.layout.grow_up(), desc="Grow window up"),
-        Key([mod], "n", lazy.layout.normalize(), desc="Reset all window sizes"),
-        Key([mod], "f", lazy.window.toggle_fullscreen(), desc="Toggle focused window to fullscreen"),
-        Key([mod], "v", lazy.window.toggle_floating(), desc="Toggle focused window to floating"),
+        Key([MOD, "control"], "h", lazy.layout.grow_left(), desc="Grow window to the left"),
+        Key([MOD, "control"], "l", lazy.layout.grow_right(), desc="Grow window to the right"),
+        Key([MOD, "control"], "j", lazy.layout.grow_down(), desc="Grow window down"),
+        Key([MOD, "control"], "k", lazy.layout.grow_up(), desc="Grow window up"),
+        Key([MOD], "n", lazy.layout.normalize(), desc="Reset all window sizes"),
+        Key([MOD], "f", lazy.window.toggle_fullscreen(), desc="Toggle focused window to fullscreen"),
+        Key([MOD], "v", lazy.window.toggle_floating(), desc="Toggle focused window to floating"),
         # Toggle between split and unsplit sides of stack.
         # Split = all windows displayed
         # Unsplit = 1 window displayed, like Max layout, but still with
         # multiple stack panes
         Key(
-            [mod, "shift"],
+            [MOD, "shift"],
             "Return",
             lazy.layout.toggle_split(),
             desc="Toggle between split and unsplit sides of stack",
         ),
-        Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
-        Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
-        Key([mod], "q", lazy.window.kill(), desc="Kill focused window"),
-        Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
-        Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
-        Key([mod], "d", lazy.spawn(app_launcher), desc="Open application launcher"),
+        Key([MOD], "Return", lazy.spawn(TERMINAL), desc="Launch terminal"),
+        Key([MOD], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
+        Key([MOD], "q", lazy.window.kill(), desc="Kill focused window"),
+        Key([MOD, "control"], "r", lazy.reload_config(), desc="Reload the config"),
+        Key([MOD, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
+        Key([MOD], "d", lazy.spawn(APP_LAUNCHER), desc="Open application launcher"),
 
         # Chuyển đổi giữa các workspace liền kề
-        Key([mod, mod1], "Left", switch_to_prev_group(), desc="Chuyển đến workspace bên trái"),
-        Key([mod, mod1], "Right", switch_to_next_group(), desc="Chuyển đến workspace bên phải"),
+        Key([MOD, MOD_ALT], "Left", switch_to_prev_group(), desc="Chuyển đến workspace bên trái"),
+        Key([MOD, MOD_ALT], "Right", switch_to_next_group(), desc="Chuyển đến workspace bên phải"),
 
     ##CUSTOM
         Key([], "XF86AudioRaiseVolume", lazy.spawn("pactl set-sink-volume 0 +1%"), desc='Volume Up'),
@@ -97,10 +102,10 @@ def init_keys():
         Key([], "XF86MonBrightnessDown", lazy.spawn("brightnessctl s 5%-"), desc='brightness Down'),
 
     ##Misc keybinds
-        Key([mod, "control"], "p", lazy.spawn(f"fish -c '{ksnipmenu_script}'"), desc='Screenshot Menu'),
-        Key([mod], "e", lazy.spawn(filemanager), desc="Open file manager"),
-        Key([mod], "s", toggle_sticky_windows(), desc="Toggle state of sticky for current window"),
-        Key([mod], "x", lazy.spawn(f"fish -c '{powermenu_script}'"), desc="Show power menu"),
-        Key([mod], "g", lazy.spawn(gpu_screen_recorder), desc="Open GPU Screen Recorder"),
+        Key([MOD, "control"], "p", lazy.spawn(f"fish -c '{KSNIPMENU_SCRIPT}'"), desc='Screenshot Menu'),
+        Key([MOD], "e", lazy.spawn(FILEMANAGER), desc="Open file manager"),
+        Key([MOD], "s", toggle_sticky_windows(), desc="Toggle state of sticky for current window"),
+        Key([MOD], "x", lazy.spawn(f"fish -c '{POWERMENU_SCRIPT}'"), desc="Show power menu"),
+        Key([MOD], "g", lazy.spawn(GPU_SCREEN_RECORDER), desc="Open GPU Screen Recorder"),
     ]
     return keys

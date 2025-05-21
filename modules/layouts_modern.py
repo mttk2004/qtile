@@ -1,33 +1,35 @@
 """
 Cấu hình bố cục cửa sổ hiện đại cho Qtile.
 
-Sử dụng bảng màu từ themes/colors.py.
+Sử dụng bảng màu từ themes/colors.py và cài đặt từ settings.py.
 """
 
 from libqtile import layout
 from libqtile.config import Match
 
 from themes.colors import colors
+from modules.settings import (
+    LAYOUT_MARGIN, LAYOUT_BORDER_WIDTH, LAYOUT_RATIO, LAYOUT_MIN_RATIO,
+    LAYOUT_MAX_RATIO, LAYOUT_CHANGE_RATIO, LAYOUT_GROW_AMOUNT,
+    TREETAB_FONTSIZE, TREETAB_SECTION_FONTSIZE, TREETAB_PADDING,
+    TREETAB_PANEL_WIDTH, TREETAB_SECTION_TOP, FONT_FAMILY
+)
 
 def init_layouts():
     """Khởi tạo danh sách layouts.
 
     Sử dụng các layout hiện đại với thiết kế tối giản và hiệu quả.
     """
-    # Tăng margin cho tất cả các layout để có cảm giác hiện đại và thoáng hơn
-    margin_size = 12  # Tăng margin lên 12px
-    border_width = 2  # Giữ nguyên độ rộng viền
-
     layouts = [
         # Layout Columns - Bố cục cột, phù hợp cho nhiều cửa sổ
         layout.Columns(
             border_focus=colors["border_focus"],
             border_normal=colors["border_normal"],
-            border_width=border_width,
+            border_width=LAYOUT_BORDER_WIDTH,
             border_on_single=False,
-            margin=margin_size,
-            margin_on_single=margin_size,
-            grow_amount=2,
+            margin=LAYOUT_MARGIN,
+            margin_on_single=LAYOUT_MARGIN,
+            grow_amount=LAYOUT_GROW_AMOUNT,
             insert_position=1,  # Thêm cửa sổ mới vào vị trí sau cửa sổ hiện tại
         ),
 
@@ -38,29 +40,29 @@ def init_layouts():
         layout.MonadTall(
             border_focus=colors["border_focus"],
             border_normal=colors["border_normal"],
-            border_width=border_width,
-            margin=margin_size,
-            ratio=0.6,
-            min_ratio=0.30,
-            max_ratio=0.70,
-            change_ratio=0.05,
+            border_width=LAYOUT_BORDER_WIDTH,
+            margin=LAYOUT_MARGIN,
+            ratio=LAYOUT_RATIO,
+            min_ratio=LAYOUT_MIN_RATIO,
+            max_ratio=LAYOUT_MAX_RATIO,
+            change_ratio=LAYOUT_CHANGE_RATIO,
         ),
 
         # Layout MonadWide - Bố cục cửa sổ chính ở trên, các cửa sổ khác ở dưới
         layout.MonadWide(
             border_focus=colors["border_focus"],
             border_normal=colors["border_normal"],
-            border_width=border_width,
-            margin=margin_size,
-            ratio=0.6,
+            border_width=LAYOUT_BORDER_WIDTH,
+            margin=LAYOUT_MARGIN,
+            ratio=LAYOUT_RATIO,
         ),
 
         # Layout Matrix - Bố cục dạng lưới
         layout.Matrix(
             border_focus=colors["border_focus"],
             border_normal=colors["border_normal"],
-            border_width=border_width,
-            margin=margin_size,
+            border_width=LAYOUT_BORDER_WIDTH,
+            margin=LAYOUT_MARGIN,
         ),
 
         # Layout TreeTab - Bố cục dạng cây
@@ -68,18 +70,18 @@ def init_layouts():
             active_bg=colors["green_primary"],
             active_fg=colors["bg"],
             bg_color=colors["bg"],
-            font="JetBrains Mono",
-            fontsize=14,  # Tăng kích thước font lên 14
+            font=FONT_FAMILY,
+            fontsize=TREETAB_FONTSIZE,
             inactive_bg=colors["inactive"],
             inactive_fg=colors["fg"],
-            padding_left=8,  # Tăng padding
-            padding_x=8,     # Tăng padding
-            padding_y=8,     # Tăng padding
+            padding_left=TREETAB_PADDING,
+            padding_x=TREETAB_PADDING,
+            padding_y=TREETAB_PADDING,
             sections=["Tabs"],
-            section_fontsize=14,  # Tăng kích thước font lên 14
+            section_fontsize=TREETAB_SECTION_FONTSIZE,
             section_fg=colors["green_accent"],
-            section_top=15,
-            panel_width=220,  # Tăng chiều rộng panel
+            section_top=TREETAB_SECTION_TOP,
+            panel_width=TREETAB_PANEL_WIDTH,
         ),
     ]
     return layouts
@@ -92,7 +94,7 @@ def init_floating_layout():
     floating_layout = layout.Floating(
         border_focus=colors["border_focus"],
         border_normal=colors["border_normal"],
-        border_width=2,
+        border_width=LAYOUT_BORDER_WIDTH,
         float_rules=[
             # Thêm các quy tắc cho các cửa sổ nổi
             *layout.Floating.default_float_rules,

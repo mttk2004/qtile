@@ -1,5 +1,8 @@
 #!/bin/fish
 
+# Lấy các biến môi trường từ settings.py
+eval (python3 ~/.config/qtile/scripts/export_settings.py fish)
+
 # Định dạng tên file ảnh
 set timestamp (date '+%y%m%d_%H%M%S')
 set save_path "$HOME/Pictures/$timestamp.png"

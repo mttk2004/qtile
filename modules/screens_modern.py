@@ -1,14 +1,14 @@
 """
 Cấu hình màn hình hiện đại cho Qtile.
 
-Sử dụng widgets hiện đại từ widgets_modern.py.
+Sử dụng widgets hiện đại từ widgets_modern.py và cài đặt từ settings.py.
 """
 
 from libqtile.config import Screen
 from libqtile import bar
 import os
 
-from modules.settings import bar_height
+from modules.settings import BAR_HEIGHT, BAR_MARGIN, DEFAULT_WALLPAPER
 from modules.widgets_modern import init_widgets_list, init_secondary_widgets_list
 from themes.colors import colors
 
@@ -17,14 +17,11 @@ def init_screens():
 
     Hỗ trợ nhiều màn hình với cấu hình khác nhau.
     """
-    # Điều chỉnh kích thước thanh bar
-    bar_size = 44  # Tăng kích thước thanh bar lên 44px để phù hợp với font lớn hơn
-
     # Cấu hình thanh bar hiện đại
     bar_config = {
-        "size": bar_size,
+        "size": BAR_HEIGHT,
         "background": colors["bg"],
-        "margin": [5, 8, 0, 8],  # [Top, Right, Bottom, Left] - Tăng margin top
+        "margin": BAR_MARGIN,  # [Top, Right, Bottom, Left]
         "border_width": [0, 0, 0, 0],  # [Top, Right, Bottom, Left] - Tắt border
     }
 
@@ -36,9 +33,8 @@ def init_screens():
                 init_widgets_list(),
                 **bar_config,
             ),
-            # Có thể thêm wallpaper nếu muốn
-            # wallpaper="~/.config/qtile/wallpapers/wallpaper.jpg",
-            # wallpaper_mode="fill",
+            wallpaper=os.path.expanduser(DEFAULT_WALLPAPER),
+            wallpaper_mode="fill",
         ),
     ]
 
@@ -62,8 +58,8 @@ def init_screens():
                         init_secondary_widgets_list(),
                         **bar_config,
                     ),
-                    # wallpaper="~/.config/qtile/wallpapers/wallpaper2.jpg",
-                    # wallpaper_mode="fill",
+                    wallpaper=os.path.expanduser(DEFAULT_WALLPAPER),
+                    wallpaper_mode="fill",
                 )
             )
     except (FileNotFoundError, IOError, OSError):

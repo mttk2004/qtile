@@ -1,5 +1,8 @@
 #!/bin/fish
 
+# Lấy các biến môi trường từ settings.py
+eval (python3 ~/.config/qtile/scripts/export_settings.py fish)
+
 # Power menu sử dụng Rofi với theme rounded-green-dark phù hợp với cấu hình hiện tại của Qtile
 
 # Lựa chọn menu
