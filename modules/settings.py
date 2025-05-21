@@ -12,12 +12,12 @@ gpu_screen_recorder = "flatpak run com.dec05eba.gpu_screen_recorder"
 
 # Appearance
 font_family = "CaskaydiaCove Nerd Font SemiBold"
-font_size = 16
+font_size = 18
 default_font = "sans"
-default_fontsize = 14
+default_fontsize = 16
 
 # Bar appearance
-bar_height = 36
+bar_height = 40
 bar_margin = [0, 8, 6, 8]  # [Top, Right, Bottom, Left]
 
 # Colors

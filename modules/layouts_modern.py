@@ -14,15 +14,19 @@ def init_layouts():
 
     Sử dụng các layout hiện đại với thiết kế tối giản và hiệu quả.
     """
+    # Tăng margin cho tất cả các layout để có cảm giác hiện đại và thoáng hơn
+    margin_size = 12  # Tăng margin lên 12px
+    border_width = 2  # Giữ nguyên độ rộng viền
+
     layouts = [
         # Layout Columns - Bố cục cột, phù hợp cho nhiều cửa sổ
         layout.Columns(
             border_focus=colors["border_focus"],
             border_normal=colors["border_normal"],
-            border_width=2,
+            border_width=border_width,
             border_on_single=False,
-            margin=6,
-            margin_on_single=6,
+            margin=margin_size,
+            margin_on_single=margin_size,
             grow_amount=2,
             insert_position=1,  # Thêm cửa sổ mới vào vị trí sau cửa sổ hiện tại
         ),
@@ -34,8 +38,8 @@ def init_layouts():
         layout.MonadTall(
             border_focus=colors["border_focus"],
             border_normal=colors["border_normal"],
-            border_width=2,
-            margin=6,
+            border_width=border_width,
+            margin=margin_size,
             ratio=0.6,
             min_ratio=0.30,
             max_ratio=0.70,
@@ -46,8 +50,8 @@ def init_layouts():
         layout.MonadWide(
             border_focus=colors["border_focus"],
             border_normal=colors["border_normal"],
-            border_width=2,
-            margin=6,
+            border_width=border_width,
+            margin=margin_size,
             ratio=0.6,
         ),
 
@@ -55,8 +59,8 @@ def init_layouts():
         layout.Matrix(
             border_focus=colors["border_focus"],
             border_normal=colors["border_normal"],
-            border_width=2,
-            margin=6,
+            border_width=border_width,
+            margin=margin_size,
         ),
 
         # Layout TreeTab - Bố cục dạng cây
@@ -65,17 +69,17 @@ def init_layouts():
             active_fg=colors["bg"],
             bg_color=colors["bg"],
             font="JetBrains Mono",
-            fontsize=12,
+            fontsize=14,  # Tăng kích thước font lên 14
             inactive_bg=colors["inactive"],
             inactive_fg=colors["fg"],
-            padding_left=6,
-            padding_x=6,
-            padding_y=6,
+            padding_left=8,  # Tăng padding
+            padding_x=8,     # Tăng padding
+            padding_y=8,     # Tăng padding
             sections=["Tabs"],
-            section_fontsize=12,
+            section_fontsize=14,  # Tăng kích thước font lên 14
             section_fg=colors["green_accent"],
             section_top=15,
-            panel_width=200,
+            panel_width=220,  # Tăng chiều rộng panel
         ),
     ]
     return layouts
