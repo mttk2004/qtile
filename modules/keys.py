@@ -4,7 +4,7 @@ from libqtile.lazy import lazy
 from modules.settings import mod, mod1, terminal, filemanager, powermenu_script, app_launcher, gpu_screen_recorder, ksnipmenu_script
 
 # Sticky windows
-sticky_windows = []
+sticky_windows: list = []
 
 @lazy.function
 def toggle_sticky_windows(qtile, window=None):
