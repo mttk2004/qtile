@@ -71,7 +71,7 @@ GROUP_LABELS = ["⬤"] * 9  # Nhãn cho các nhóm
 ASSETS_DIR = "~/.config/qtile/Assets/"
 ICONS_DIR = f"{ASSETS_DIR}Bar-Icons/"
 WALLPAPERS_DIR = "~/.config/qtile/Wallpaper/"
-DEFAULT_WALLPAPER = f"{WALLPAPERS_DIR}Skyscraper.png"
+DEFAULT_WALLPAPER = f"{WALLPAPERS_DIR}bird.jpg"
 
 # Scripts paths
 SCRIPTS_DIR = "~/.config/qtile/scripts/"
