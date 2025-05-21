@@ -1,0 +1,115 @@
+---
+description:
+globs:
+alwaysApply: true
+---
+# Tối ưu hiệu suất cho Qtile
+
+## Nguyên tắc tối ưu
+- Hiệu quả: Sử dụng tài nguyên hệ thống một cách tiết kiệm
+- Phản hồi nhanh: Giảm thiểu độ trễ trong tương tác người dùng
+- Khởi động nhanh: Tối ưu thời gian khởi động Qtile
+- Tránh rò rỉ bộ nhớ: Quản lý tài nguyên đúng cách
+
+## Tối ưu code Python
+- Sử dụng list/dict comprehension thay vì vòng lặp khi có thể
+- Tránh import không cần thiết, đặc biệt là import *
+- Sử dụng lazy loading cho các module nặng
+- Tránh tạo các biến tạm thời không cần thiết
+
+## Tối ưu widget trong modules/widgets.py
+- Giới hạn số lượng widget trên thanh bar
+- Điều chỉnh tần suất cập nhật widget phù hợp (update_interval)
+- Sử dụng các widget nhẹ, tránh các widget tùy chỉnh phức tạp
+- Tránh các widget liên tục truy vấn hệ thống
+
+```python
+# Trong modules/widgets.py
+# Widget với tần suất cập nhật phù hợp
+widget.Memory(
+    format='{MemUsed:.0f}{mm}/{MemTotal:.0f}{mm}',
+    update_interval=5.0,  # Cập nhật mỗi 5 giây thay vì mặc định 1 giây
+    foreground=colors["green_primary"],
+)
+
+# Sử dụng widget nhẹ thay vì widget nặng
+# Thay vì sử dụng widget.Net với nhiều thông số
+widget.TextBox(
+    text=" ",  # Icon mạng
+    foreground=colors["green_primary"],
+)
+```
+
+## Tối ưu hooks và callbacks trong modules/hooks.py
+- Sử dụng hooks một cách tiết kiệm
+- Đảm bảo các callback thực hiện nhanh chóng
+- Tránh các tác vụ nặng trong các hook được gọi thường xuyên
+- Sử dụng subprocess.Popen thay vì subprocess.run cho các lệnh không cần đợi kết quả
+
+```python
+# Trong modules/hooks.py
+# Tốt - không chặn luồng chính
+@hook.subscribe.startup_once
+def autostart():
+    """Khởi động các ứng dụng khi Qtile khởi động."""
+    script = os.path.expanduser('~/.config/qtile/scripts/autostart.sh')
+    subprocess.Popen([script])
+
+# Không tốt - chặn luồng chính
+@hook.subscribe.startup_once
+def bad_autostart():
+    """Khởi động các ứng dụng và đợi hoàn thành."""
+    script = os.path.expanduser('~/.config/qtile/scripts/autostart.sh')
+    subprocess.run([script])  # Chặn luồng chính cho đến khi hoàn thành
+```
+
+## Ví dụ tối ưu code
+```python
+# Trong bất kỳ module nào
+
+# Không tối ưu
+for i in range(len(windows)):
+    window = windows[i]
+    if window.name == target:
+        return window
+
+# Tối ưu hơn
+for window in windows:
+    if window.name == target:
+        return window
+
+# Tối ưu nhất (nếu phù hợp)
+next((window for window in windows if window.name == target), None)
+```
+
+## Tối ưu khởi động ứng dụng trong scripts/autostart.sh
+- Khởi động các ứng dụng nặng với độ trễ
+- Kiểm tra ứng dụng đã chạy trước khi khởi động
+- Sử dụng & để chạy ứng dụng trong nền
+
+```bash
+#!/bin/bash
+# Trong scripts/autostart.sh
+
+# Kiểm tra và khởi động picom nếu chưa chạy
+if ! pgrep -x "picom" > /dev/null; then
+    picom --config $HOME/.config/qtile/scripts/picom.conf &
+fi
+
+# Khởi động các ứng dụng với độ trễ
+(sleep 2 && nitrogen --restore) &
+(sleep 3 && nm-applet) &
+```
+
+## Cấu hình tối ưu trong config.py
+- Sử dụng các cấu hình giúp giảm tài nguyên
+- Tránh các tính năng không cần thiết
+
+```python
+# Trong config.py
+# Tắt các tính năng không cần thiết
+follow_mouse_focus = False  # Tắt focus theo chuột nếu không cần
+auto_fullscreen = True
+reconfigure_screens = True
+auto_minimize = False  # Tắt auto minimize nếu không cần
+```

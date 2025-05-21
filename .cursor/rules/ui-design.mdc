@@ -1,0 +1,130 @@
+---
+description:
+globs:
+alwaysApply: true
+---
+# Thiết kế giao diện Qtile
+
+## Nguyên tắc thiết kế
+- Tối giản (Minimalist): Loại bỏ các yếu tố không cần thiết
+- Nhất quán: Sử dụng các yếu tố thiết kế nhất quán trong toàn bộ giao diện
+- Tinh tế: Sử dụng các hiệu ứng và chuyển động tinh tế
+- Hiện đại: Áp dụng các xu hướng thiết kế hiện đại
+
+## Bảng màu
+- Màu chủ đạo: Xanh lá (Green) với các sắc độ khác nhau
+- Màu nền: Tối, trung tính để làm nổi bật màu chủ đạo
+- Màu tương phản: Sử dụng có chọn lọc để nhấn mạnh các yếu tố quan trọng
+- Độ trong suốt: Sử dụng hợp lý để tạo cảm giác chiều sâu
+
+## Widget và thanh bar
+- Sử dụng font hiện đại, dễ đọc (như Noto Sans, JetBrains Mono, etc.)
+- Khoảng cách hợp lý giữa các widget
+- Icon đơn giản, nhất quán (khuyến khích sử dụng font icon như Font Awesome)
+- Hiển thị thông tin cần thiết, tránh quá tải thông tin
+
+## Layouts
+- Tối ưu không gian màn hình
+- Viền cửa sổ mỏng, tinh tế
+- Khoảng cách hợp lý giữa các cửa sổ
+- Hiệu ứng chuyển động mượt mà khi thay đổi layout
+
+## Đề xuất cải tiến giao diện
+1. **Tạo file themes/colors.py:**
+```python
+"""
+Định nghĩa màu sắc cho Qtile.
+"""
+
+# Bảng màu hiện đại với tông xanh lá
+colors = {
+    "bg": "#1a1b26",
+    "fg": "#c0caf5",
+    "green_primary": "#9ece6a",
+    "green_secondary": "#73daca",
+    "green_dark": "#2b7a78",
+    "accent": "#7dcfff",
+    "warning": "#ff9e64",
+    "error": "#f7768e",
+    "inactive": "#565f89",
+}
+```
+
+2. **Cập nhật modules/widgets.py:**
+- Tổ chức các widget theo nhóm chức năng
+- Sử dụng bảng màu nhất quán
+- Thêm padding và định dạng phù hợp
+- Sử dụng font icon thay vì text khi có thể
+
+3. **Cập nhật modules/layouts.py:**
+- Thêm margin cho các layout để tạo khoảng cách
+- Sử dụng màu viền nhất quán
+- Điều chỉnh tỷ lệ và kích thước phù hợp
+
+4. **Cập nhật modules/screens.py:**
+- Thiết kế thanh bar hiện đại và tối giản
+- Sử dụng wallpaper phù hợp với bảng màu
+- Thêm các widget hữu ích nhưng không gây rối mắt
+
+## Ví dụ cải tiến widget
+```python
+# Thiết lập widget mặc định
+widget_defaults = dict(
+    font="JetBrains Mono",
+    fontsize=12,
+    padding=6,
+    background=colors["bg"],
+    foreground=colors["fg"],
+)
+
+# Widget GroupBox hiện đại
+GroupBox(
+    active=colors["fg"],
+    inactive=colors["inactive"],
+    highlight_method="line",
+    highlight_color=[colors["bg"], colors["bg"]],
+    this_current_screen_border=colors["green_primary"],
+    urgent_border=colors["error"],
+    rounded=False,
+    margin_x=4,
+    padding_x=4,
+    disable_drag=True,
+)
+
+# Widget TaskList với thiết kế tối giản
+TaskList(
+    border=colors["green_primary"],
+    unfocused_border=colors["inactive"],
+    highlight_method="border",
+    title_width_method="uniform",
+    max_title_width=150,
+    rounded=False,
+    padding_x=8,
+    padding_y=4,
+    margin=2,
+)
+```
+
+## Mẫu code thiết lập màu sắc
+```python
+# Bảng màu hiện đại với tông xanh lá
+colors = {
+    "bg": "#1a1b26",
+    "fg": "#c0caf5",
+    "green_primary": "#9ece6a",
+    "green_secondary": "#73daca",
+    "green_dark": "#2b7a78",
+    "accent": "#7dcfff",
+    "warning": "#ff9e64",
+    "error": "#f7768e",
+    "inactive": "#565f89",
+}
+
+# Áp dụng màu sắc vào widget
+widget_defaults = dict(
+    font="JetBrains Mono",
+    fontsize=12,
+    padding=3,
+    background=colors["bg"],
+    foreground=colors["fg"],
+)

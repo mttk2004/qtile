@@ -1,0 +1,95 @@
+---
+description:
+globs:
+alwaysApply: true
+---
+# Dự án Qtile - Tổng quan
+
+Đây là cấu hình Qtile - một window manager có thể tùy biến hoàn toàn bằng Python.
+
+## Mục tiêu dự án
+- Tạo một môi trường làm việc hiệu quả, dễ sử dụng và đẹp mắt
+- Cấu trúc code sạch, dễ bảo trì và mở rộng
+- Giao diện hiện đại với tông màu xanh (green) chủ đạo
+- Tối ưu hóa hiệu suất và trải nghiệm người dùng
+
+## Cấu trúc thư mục hiện tại
+```
+qtile/
+├── config.py              # File cấu hình chính, import các module khác
+├── modules/               # Thư mục chứa các module chức năng
+│   ├── __init__.py        # Đánh dấu thư mục là một Python package
+│   ├── keys.py            # Cấu hình phím tắt
+│   ├── groups.py          # Cấu hình nhóm cửa sổ
+│   ├── layouts.py         # Cấu hình bố cục cửa sổ
+│   ├── screens.py         # Cấu hình màn hình
+│   ├── widgets.py         # Cấu hình và tùy chỉnh widget
+│   ├── hooks.py           # Các hook và callback
+│   ├── mouse.py           # Cấu hình chuột
+│   └── settings.py        # Các cài đặt chung
+├── scripts/               # Scripts tiện ích
+│   ├── autostart.sh       # Script khởi động các ứng dụng
+│   ├── powermenu.sh       # Script menu nguồn
+│   ├── ksnipmenu.sh       # Script menu chụp màn hình
+│   └── picom.conf         # Cấu hình picom (compositor)
+├── themes/                # Thư mục chứa theme (hiện đang trống)
+├── Assets/                # Thư mục chứa tài nguyên
+└── Wallpaper/             # Thư mục chứa hình nền
+```
+
+## Quy ước chung
+- Tuân thủ PEP 8 cho code Python
+- Sử dụng docstring cho mọi hàm và class
+- Tách biệt rõ ràng các phần cấu hình thành các module riêng
+- Sử dụng biến cho các giá trị được sử dụng nhiều lần
+
+## Cấu trúc config.py hiện tại
+```python
+# Import modules
+from modules.keys import init_keys
+from modules.groups import init_groups, init_group_keys
+from modules.layouts import init_layouts, init_floating_layout
+from modules.mouse import init_mouse
+from modules.screens import init_screens
+import modules.hooks
+
+# Initialize Qtile components
+keys = init_keys()
+groups = init_groups()
+keys = init_group_keys(groups, keys)
+layouts = init_layouts()
+floating_layout = init_floating_layout()
+mouse = init_mouse()
+screens = init_screens()
+
+# Additional configuration
+dgroups_key_binder = None
+dgroups_app_rules = []  # type: list
+follow_mouse_focus = True
+bring_front_click = False
+cursor_warp = False
+auto_fullscreen = True
+focus_on_window_activation = "smart"
+reconfigure_screens = True
+auto_minimize = True
+wl_input_rules = None
+
+wmname = "LG3D"
+```
+
+## Đề xuất cải tiến
+1. **Thêm thư mục themes với nội dung cụ thể:**
+   - Tạo file `themes/colors.py` để quản lý màu sắc
+   - Tạo file `themes/__init__.py` để export các theme
+
+2. **Cải thiện tổ chức widgets:**
+   - Tách các widget tùy chỉnh vào thư mục `modules/widgets/`
+   - Tạo các widget riêng biệt cho từng chức năng
+
+3. **Cải thiện tài liệu:**
+   - Thêm docstring đầy đủ cho mỗi module
+   - Thêm README.md mô tả cấu trúc và cách sử dụng
+
+4. **Tổ chức tài nguyên:**
+   - Chuẩn hóa tên thư mục thành chữ thường: `assets/` và `wallpapers/`
+   - Tổ chức tài nguyên theo loại (icons, fonts, etc.)

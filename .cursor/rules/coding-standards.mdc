@@ -1,0 +1,51 @@
+---
+description:
+globs:
+alwaysApply: true
+---
+# Quy ước code Python cho Qtile
+
+## Cấu trúc code
+- Mỗi module nên có một mục đích rõ ràng và tập trung
+- Sử dụng các hàm nhỏ, có mục đích đơn lẻ
+- Tránh lặp code, tạo các hàm tiện ích khi cần
+- Tổ chức imports theo thứ tự: thư viện chuẩn, thư viện bên thứ 3, modules nội bộ
+
+## Đặt tên
+- Class: PascalCase (ví dụ: `CustomWidget`)
+- Hàm và biến: snake_case (ví dụ: `launch_app`)
+- Hằng số: UPPERCASE_WITH_UNDERSCORES (ví dụ: `PRIMARY_COLOR`)
+- Tên phải mô tả rõ mục đích, tránh viết tắt không cần thiết
+
+## Comments và Docstrings
+- Mỗi module, class và hàm phải có docstring
+- Sử dụng định dạng docstring theo Google style
+- Chú thích cho code phức tạp hoặc không rõ ràng
+- Tránh comments dư thừa cho code đã rõ ràng
+
+## Cấu trúc module
+```python
+"""Mô tả ngắn gọn về module.
+
+Mô tả chi tiết hơn nếu cần thiết.
+"""
+
+# Imports
+import os
+import sys
+
+# Third-party imports
+from libqtile import bar, layout, widget, hook
+from libqtile.config import Key, Group, Screen
+
+# Local imports
+from settings import colors, keys
+
+# Constants
+MOD_KEY = "mod4"
+TERMINAL = "alacritty"
+
+# Functions
+def function_name():
+    """Mô tả chức năng của hàm."""
+    pass

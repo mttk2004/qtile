@@ -1,0 +1,119 @@
+---
+description:
+globs:
+alwaysApply: true
+---
+# Cấu trúc dự án Qtile
+
+## Cấu trúc hiện tại
+Dự án hiện tại đã được tổ chức theo mô hình module hóa, với cấu trúc thư mục như sau:
+```
+qtile/
+├── config.py              # File cấu hình chính, import các module khác
+├── modules/               # Thư mục chứa các module chức năng
+│   ├── __init__.py        # Đánh dấu thư mục là một Python package
+│   ├── keys.py            # Cấu hình phím tắt
+│   ├── groups.py          # Cấu hình nhóm cửa sổ
+│   ├── layouts.py         # Cấu hình bố cục cửa sổ
+│   ├── screens.py         # Cấu hình màn hình
+│   ├── widgets.py         # Cấu hình và tùy chỉnh widget
+│   ├── hooks.py           # Các hook và callback
+│   ├── mouse.py           # Cấu hình chuột
+│   └── settings.py        # Các cài đặt chung
+├── scripts/               # Scripts tiện ích
+│   ├── autostart.sh       # Script khởi động các ứng dụng
+│   ├── powermenu.sh       # Script menu nguồn
+│   ├── ksnipmenu.sh       # Script menu chụp màn hình
+│   └── ...
+├── themes/                # Thư mục chứa theme (hiện đang trống)
+├── Assets/                # Thư mục chứa tài nguyên
+└── Wallpaper/             # Thư mục chứa hình nền
+```
+
+## Nguyên tắc tổ chức
+- Mô-đun hóa: Các chức năng đã được tách thành các module riêng biệt
+- Đơn giản: Mỗi file phục vụ một mục đích cụ thể
+- Dễ bảo trì: Cấu trúc rõ ràng, dễ tìm và sửa đổi
+- Mở rộng: Dễ dàng thêm tính năng mới mà không ảnh hưởng đến code hiện có
+
+## Cấu trúc config.py hiện tại
+```python
+# Import modules
+from modules.keys import init_keys
+from modules.groups import init_groups, init_group_keys
+from modules.layouts import init_layouts, init_floating_layout
+from modules.mouse import init_mouse
+from modules.screens import init_screens
+import modules.hooks
+
+# Initialize Qtile components
+keys = init_keys()
+groups = init_groups()
+keys = init_group_keys(groups, keys)
+layouts = init_layouts()
+floating_layout = init_floating_layout()
+mouse = init_mouse()
+screens = init_screens()
+
+# Additional configuration
+dgroups_key_binder = None
+dgroups_app_rules = []  # type: list
+follow_mouse_focus = True
+bring_front_click = False
+cursor_warp = False
+auto_fullscreen = True
+focus_on_window_activation = "smart"
+reconfigure_screens = True
+auto_minimize = True
+wl_input_rules = None
+
+wmname = "LG3D"
+```
+
+## Đề xuất cải tiến
+1. **Thêm thư mục themes với nội dung cụ thể:**
+   - Tạo file `themes/colors.py` để quản lý màu sắc
+   - Tạo file `themes/__init__.py` để export các theme
+
+2. **Tổ chức lại widgets:**
+   - Tách các widget tùy chỉnh vào thư mục `modules/widgets/`
+   - Tạo các widget riêng biệt cho từng chức năng
+
+3. **Cải thiện tài liệu:**
+   - Thêm docstring đầy đủ cho mỗi module
+   - Thêm README.md mô tả cấu trúc và cách sử dụng
+
+4. **Tổ chức tài nguyên:**
+   - Chuẩn hóa tên thư mục thành chữ thường: `assets/` và `wallpapers/`
+   - Tổ chức tài nguyên theo loại (icons, fonts, etc.)
+
+## Mẫu cấu trúc module
+```python
+"""
+Module description.
+
+Detailed explanation about the module's purpose and functionality.
+"""
+
+# Standard library imports
+import os
+import subprocess
+
+# Third-party imports
+from libqtile import bar, layout, widget, hook
+from libqtile.config import Key, Group, Screen
+
+# Local imports
+from modules.settings import COLORS, TERMINAL, BROWSER
+
+# Constants
+MOD_KEY = "mod4"
+
+def init_function():
+    """Initialize and return components.
+
+    Returns:
+        The initialized components.
+    """
+    # Implementation
+    return component

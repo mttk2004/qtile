@@ -1,0 +1,136 @@
+---
+description:
+globs:
+alwaysApply: true
+---
+# Mở rộng và tùy biến Qtile
+
+## Nguyên tắc mở rộng
+- Tính mô-đun: Thiết kế các thành phần có thể tái sử dụng
+- Tính tương thích: Đảm bảo các thành phần mới hoạt động với hệ thống hiện có
+- Tính linh hoạt: Thiết kế cho phép dễ dàng thay đổi và tùy chỉnh
+- Tính bảo trì: Code dễ đọc và dễ sửa đổi
+
+## Tạo widget tùy chỉnh
+- Kế thừa từ các widget có sẵn khi có thể
+- Tách biệt logic và giao diện
+- Cung cấp các tùy chọn cấu hình
+- Xử lý lỗi một cách thích hợp
+
+```python
+# Thêm vào modules/widgets.py hoặc tạo file mới modules/widgets/custom_widget.py
+from libqtile.widget import base
+
+class CustomWidget(base.InLoopPollText):
+    """Widget tùy chỉnh mẫu."""
+
+    defaults = [
+        ("update_interval", 60, "Cập nhật mỗi X giây"),
+        ("foreground", "#ffffff", "Màu chữ"),
+    ]
+
+    def __init__(self, **config):
+        base.InLoopPollText.__init__(self, **config)
+        self.add_defaults(CustomWidget.defaults)
+
+    def poll(self):
+        """Lấy dữ liệu để hiển thị."""
+        try:
+            # Logic xử lý
+            return "Kết quả"
+        except Exception as e:
+            self.logger.error(f"Lỗi: {e}")
+            return "Error"
+```
+
+## Mở rộng phím tắt
+- Tổ chức phím tắt theo nhóm chức năng trong modules/keys.py
+- Sử dụng hàm helper để tạo phím tắt
+- Tạo phím tắt nhất quán giữa các ứng dụng
+- Cung cấp phím tắt cho tất cả các chức năng thường xuyên sử dụng
+
+```python
+# Trong modules/keys.py
+def init_keys():
+    """Khởi tạo và trả về danh sách phím tắt."""
+    keys = []
+
+    # Thêm phím tắt cho ứng dụng
+    keys.extend([
+        Key([mod], "Return", lazy.spawn(terminal), desc="Mở terminal"),
+        Key([mod], "b", lazy.spawn(browser), desc="Mở trình duyệt"),
+    ])
+
+    # Thêm phím tắt cho quản lý cửa sổ
+    keys.extend([
+        Key([mod], "h", lazy.layout.left(), desc="Di chuyển sang trái"),
+        Key([mod], "l", lazy.layout.right(), desc="Di chuyển sang phải"),
+    ])
+
+    # Thêm phím tắt cho các script tùy chỉnh
+    keys.extend([
+        Key([mod], "p", lazy.spawn("sh -c '~/.config/qtile/scripts/powermenu.sh'"),
+            desc="Hiển thị menu nguồn"),
+    ])
+
+    return keys
+```
+
+## Tùy biến layouts trong modules/layouts.py
+- Tạo các layout phù hợp với quy trình làm việc
+- Cung cấp các tùy chọn cho mỗi layout
+- Sử dụng các layout khác nhau cho các nhóm khác nhau
+- Tùy chỉnh các thông số như biên, khoảng cách, tỷ lệ
+
+```python
+# Trong modules/layouts.py
+def init_layouts():
+    """Khởi tạo và trả về danh sách layouts."""
+    from modules.settings import colors
+
+    layouts = [
+        layout.Columns(
+            border_focus=colors["green_primary"],
+            border_normal=colors["inactive"],
+            border_width=2,
+            margin=4,
+            grow_amount=2,
+        ),
+        layout.Max(),
+        layout.MonadTall(
+            border_focus=colors["green_primary"],
+            border_normal=colors["inactive"],
+            border_width=2,
+            margin=4,
+            ratio=0.6,
+        ),
+    ]
+    return layouts
+```
+
+## Tùy biến hooks trong modules/hooks.py
+- Sử dụng hooks để tự động hóa các tác vụ
+- Khởi động ứng dụng khi Qtile bắt đầu
+- Xử lý các sự kiện cửa sổ
+- Tùy chỉnh hành vi của Qtile
+
+```python
+# Trong modules/hooks.py
+from libqtile import hook
+import subprocess
+import os
+
+@hook.subscribe.startup_once
+def autostart():
+    """Khởi động các ứng dụng khi Qtile khởi động."""
+    script = os.path.expanduser('~/.config/qtile/scripts/autostart.sh')
+    subprocess.Popen([script])
+
+@hook.subscribe.client_new
+def floating_dialogs(window):
+    """Làm cho các cửa sổ dialog nổi."""
+    dialog = window.window.get_wm_type() == 'dialog'
+    transient = window.window.get_wm_transient_for()
+    if dialog or transient:
+        window.floating = True
+```
