@@ -82,6 +82,10 @@ def init_keys():
         ),
         Key([MOD], "Return", lazy.spawn(TERMINAL), desc="Launch terminal"),
         Key([MOD], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
+
+        # Window switcher với Alt+Tab sử dụng Rofi
+        Key([MOD_ALT], "Tab", lazy.spawn("rofi -theme ~/.config/qtile/themes/rofi/modern-green-window.rasi -show window -show-icons"), desc="Chuyển đổi cửa sổ với Rofi"),
+
         Key([MOD], "q", lazy.window.kill(), desc="Kill focused window"),
         Key([MOD, "control"], "r", lazy.reload_config(), desc="Reload the config"),
         Key([MOD, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),

@@ -9,7 +9,7 @@ eval (python3 ~/.config/qtile/scripts/export_settings.py fish)
 set options "  Lock" "  Logout" "  Reboot" "  Shutdown" "  Suspend"
 
 # Tạo menu với rofi
-set selected (printf "%s\n" $options | rofi -theme rounded-green-dark -dmenu -i -p "Power Menu")
+set selected (printf "%s\n" $options | rofi -theme ~/.config/qtile/themes/rofi/modern-green.rasi -dmenu -i -p "Power Menu")
 
 # Thực hiện hành động tương ứng
 switch "$selected"

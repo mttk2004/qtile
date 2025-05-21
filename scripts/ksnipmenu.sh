@@ -11,7 +11,7 @@ set save_path "$HOME/Pictures/$timestamp.png"
 set options "  Capture Full Screen" "  Capture Selected Area" "  Capture Current Window" "  Cancel"
 
 # Tạo menu với rofi
-set selected (printf "%s\n" $options | rofi -theme rounded-green-dark -dmenu -i -p "Ksnip Menu")
+set selected (printf "%s\n" $options | rofi -theme ~/.config/qtile/themes/rofi/modern-green.rasi -dmenu -i -p "Ksnip Menu")
 
 # Thực hiện hành động tương ứng
 switch "$selected"
