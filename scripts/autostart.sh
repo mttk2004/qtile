@@ -15,7 +15,12 @@ echo "Starting picom with config: $PICOM_CONFIG_PATH" >> /tmp/picom_debug.log
 # Khởi động các ứng dụng nền
 feh --bg-fill $QTILE_DEFAULT_WALLPAPER &
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+
+# Khởi động Wired với cấu hình mới
+killall -q wired 2>/dev/null || true
+sleep 0.5
 /usr/bin/wired &
+
 eval (gnome-keyring-daemon --start)
 
 # Khởi động ibus-daemon
