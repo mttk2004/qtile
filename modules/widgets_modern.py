@@ -54,19 +54,19 @@ def init_widgets_list():
     """Khởi tạo danh sách widgets cho bar."""
     widgets_list = [
         # Logo/Menu button
-        widget.TextBox(
-            text=" ",  # Icon cho menu (nếu có font awesome)
-            foreground=colors["green_accent"],
-            fontsize=ICON_SIZE,
-            padding=WIDGET_PADDING,
-            mouse_callbacks={'Button1': open_launcher},
-        ),
+        # widget.TextBox(
+        #     text=" ",  # Icon cho menu (nếu có font awesome)
+        #     foreground=colors["green_accent"],
+        #     fontsize=ICON_SIZE,
+        #     padding=WIDGET_PADDING,
+        #     mouse_callbacks={'Button1': open_launcher},
+        # ),
 
         # Separator
-        widget.Sep(
-            linewidth=0,
-            padding=WIDGET_PADDING,
-        ),
+        # widget.Sep(
+        #     linewidth=0,
+        #     padding=WIDGET_PADDING,
+        # ),
 
         # Group Box - Hiển thị các workspace
         widget.GroupBox(
@@ -125,6 +125,13 @@ def init_widgets_list():
             foreground=colors["fg"],
             padding=WIDGET_PADDING,
             fontsize=FONT_SIZE,
+        ),
+
+        # Separator
+        widget.Sep(
+            linewidth=WIDGET_SEPARATOR_LINEWIDTH,
+            padding=WIDGET_PADDING,
+            foreground=colors["inactive"],
         ),
 
         # Systray
