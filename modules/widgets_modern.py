@@ -11,8 +11,8 @@ import os
 
 from themes.colors import colors
 from modules.settings import (
-    FONT_FAMILY, FONT_SIZE, ICON_SIZE, TERMINAL, APP_LAUNCHER, SCRIPTS_DIR, ICONS_DIR,
-    WIDGET_PADDING, WIDGET_PADDING_SMALL, WIDGET_GROUPBOX_FONTSIZE, WIDGET_SEPARATOR_LINEWIDTH,
+    FONT_FAMILY, FONT_SIZE, ICON_SIZE, ICON_SIZE_SMALL, TERMINAL, APP_LAUNCHER, SCRIPTS_DIR, ICONS_DIR,
+    WIDGET_PADDING, WIDGET_PADDING_SMALL, WIDGET_PADDING_LARGE, WIDGET_GROUPBOX_FONTSIZE, WIDGET_SEPARATOR_LINEWIDTH,
     WIDGET_UPDATE_INTERVAL, WIDGET_BATTERY_UPDATE_INTERVAL, WIDGET_MAX_CHARS, SYSTRAY_ICON_SIZE
 )
 
@@ -70,9 +70,9 @@ def init_widgets_list():
             font=FONT_FAMILY,
             fontsize=WIDGET_GROUPBOX_FONTSIZE,
             margin_y=5,
-            margin_x=6,
+            margin_x=2,
             padding_y=8,
-            padding_x=6,
+            padding_x=5,
             borderwidth=3,
             active=colors["active"],
             inactive=colors["inactive_group"],
@@ -90,18 +90,20 @@ def init_widgets_list():
 
         # Separator
         widget.Sep(
-            linewidth=0,
-            padding=WIDGET_PADDING,
+            linewidth=WIDGET_SEPARATOR_LINEWIDTH,
+            padding=WIDGET_PADDING_LARGE,
+            foreground=colors["inactive"],
         ),
 
         # Current Layout Icon
-        widget.CurrentLayoutIcon(
-            scale=0.75,
-            padding=0,
-        ),
+        # widget.CurrentLayoutIcon(
+        #     scale=0.5,
+        #     padding=0,
+        # ),
 
         # Current Layout
         widget.CurrentLayout(
+            font=FONT_FAMILY,
             padding=WIDGET_PADDING_SMALL,
             foreground=colors["green_light"],
             fontsize=FONT_SIZE,
@@ -110,7 +112,7 @@ def init_widgets_list():
         # Separator
         widget.Sep(
             linewidth=WIDGET_SEPARATOR_LINEWIDTH,
-            padding=WIDGET_PADDING,
+            padding=WIDGET_PADDING_LARGE,
             foreground=colors["inactive"],
         ),
 
@@ -128,28 +130,27 @@ def init_widgets_list():
         # Separator
         widget.Sep(
             linewidth=WIDGET_SEPARATOR_LINEWIDTH,
-            padding=WIDGET_PADDING,
+            padding=WIDGET_PADDING_LARGE,
             foreground=colors["inactive"],
         ),
 
         # Systray
         widget.Systray(
             icon_size=SYSTRAY_ICON_SIZE,
-            padding=WIDGET_PADDING,
         ),
 
         # Separator
         widget.Sep(
-            linewidth=0,
-            padding=WIDGET_PADDING,
+            linewidth=WIDGET_SEPARATOR_LINEWIDTH,
+            padding=WIDGET_PADDING_LARGE,
+            foreground=colors["inactive"],
         ),
 
         # CPU Widget với icon
         widget.TextBox(
-            text="󰘚",  # Icon CPU (nếu có font awesome)
+            text=" 󰘚",  # Icon CPU (nếu có font awesome)
             foreground=colors["green_primary"],
             fontsize=ICON_SIZE,
-            padding=3,
         ),
         widget.CPU(
             font=FONT_FAMILY,
@@ -163,7 +164,7 @@ def init_widgets_list():
 
         # Memory Widget với icon
         widget.TextBox(
-            text="󰍛",  # Icon RAM (nếu có font awesome)
+            text=" 󰍛",  # Icon RAM (nếu có font awesome)
             foreground=colors["green_primary"],
             fontsize=ICON_SIZE,
             padding=WIDGET_PADDING,
@@ -172,7 +173,6 @@ def init_widgets_list():
             font=FONT_FAMILY,
             format="{MemUsed:.0f}MB",
             foreground=colors["fg"],
-            padding=WIDGET_PADDING_SMALL,
             update_interval=WIDGET_UPDATE_INTERVAL,
             mouse_callbacks={'Button1': open_btop},
             fontsize=FONT_SIZE,
@@ -180,16 +180,15 @@ def init_widgets_list():
 
         # Battery Widget với icon
         widget.TextBox(
-            text="󰁹",  # Icon Pin (nếu có font awesome)
+            text=" 󰁹",  # Icon Pin (nếu có font awesome)
             foreground=colors["green_primary"],
-            fontsize=ICON_SIZE,
+            fontsize=ICON_SIZE_SMALL,
             padding=WIDGET_PADDING,
         ),
         widget.Battery(
             font=FONT_FAMILY,
             format="{percent:2.0%}",
             foreground=colors["fg"],
-            padding=WIDGET_PADDING_SMALL,
             update_interval=WIDGET_BATTERY_UPDATE_INTERVAL,
             charge_char="󰂄",
             discharge_char="󰂃",
@@ -203,32 +202,28 @@ def init_widgets_list():
 
         # Volume Widget với icon
         widget.TextBox(
-            text="󰕾",  # Icon Volume (nếu có font awesome)
+            text=" 󰕾",  # Icon Volume (nếu có font awesome)
             foreground=colors["green_primary"],
             fontsize=ICON_SIZE,
-            padding=WIDGET_PADDING,
         ),
         widget.PulseVolume(
             font=FONT_FAMILY,
             foreground=colors["fg"],
-            padding=WIDGET_PADDING_SMALL,
             limit_max_volume=True,
             fontsize=FONT_SIZE,
         ),
 
         # Brightness Widget với icon
         widget.TextBox(
-            text="󰃠",  # Icon Brightness (nếu có font awesome)
+            text=" 󰃠",  # Icon Brightness (nếu có font awesome)
             foreground=colors["green_primary"],
             fontsize=ICON_SIZE,
-            padding=WIDGET_PADDING,
         ),
         widget.Backlight(
             backlight_name="amdgpu_bl0",
             font=FONT_FAMILY,
             format="{percent:2.0%}",
             foreground=colors["fg"],
-            padding=WIDGET_PADDING_SMALL,
             change_command="brightnessctl s {0}%",
             step=5,
             fontsize=FONT_SIZE,
@@ -237,7 +232,7 @@ def init_widgets_list():
         # Separator
         widget.Sep(
             linewidth=WIDGET_SEPARATOR_LINEWIDTH,
-            padding=WIDGET_PADDING,
+            padding=WIDGET_PADDING_LARGE,
             foreground=colors["inactive"],
         ),
 
@@ -246,35 +241,32 @@ def init_widgets_list():
             text="󰸗",  # Icon Calendar (nếu có font awesome)
             foreground=colors["green_primary"],
             fontsize=ICON_SIZE,
-            padding=WIDGET_PADDING,
         ),
         widget.Clock(
             font=FONT_FAMILY,
             format="%d/%m/%y",
             foreground=colors["fg"],
-            padding=WIDGET_PADDING_SMALL,
             fontsize=FONT_SIZE,
         ),
 
         # Time Widget với icon
         widget.TextBox(
-            text="󰥔",  # Icon Clock (nếu có font awesome)
+            text=" 󰥔",  # Icon Clock (nếu có font awesome)
             foreground=colors["green_primary"],
             fontsize=ICON_SIZE,
-            padding=WIDGET_PADDING,
         ),
         widget.Clock(
             font=FONT_FAMILY,
             format="%H:%M",
             foreground=colors["fg"],
-            padding=WIDGET_PADDING_SMALL,
             fontsize=FONT_SIZE,
         ),
 
         # Separator
         widget.Sep(
-            linewidth=0,
-            padding=WIDGET_PADDING,
+            linewidth=WIDGET_SEPARATOR_LINEWIDTH,
+            padding=WIDGET_PADDING_LARGE,
+            foreground=colors["inactive"],
         ),
 
         # Power Menu Button
@@ -282,7 +274,6 @@ def init_widgets_list():
             text="⏻",  # Icon Power (nếu có font awesome)
             foreground=colors["error"],
             fontsize=ICON_SIZE,
-            padding=WIDGET_PADDING,
             mouse_callbacks={'Button1': open_powermenu},
         ),
     ]

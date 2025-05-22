@@ -22,7 +22,7 @@ def init_screens():
         "size": BAR_HEIGHT,
         "background": colors["bg"],
         "margin": BAR_MARGIN,  # [Top, Right, Bottom, Left]
-        "border_width": [0, 0, 0, 0],  # [Top, Right, Bottom, Left] - Tắt border
+        "border_width": [0, 10, 0, 10],  # [Top, Right, Bottom, Left]
     }
 
     # Danh sách màn hình

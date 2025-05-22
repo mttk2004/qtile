@@ -25,9 +25,10 @@ GPU_SCREEN_RECORDER = "flatpak run com.dec05eba.gpu_screen_recorder"
 # APPEARANCE - Cài đặt giao diện
 # -----------------------------------------------------
 # Font settings
-FONT_FAMILY = "CaskaydiaCove Nerd Font SemiBold"
+FONT_FAMILY = "CaskaydiaCove Nerd Font Regular"
 FONT_SIZE = 18  # Kích thước font chính
-ICON_SIZE = 24  # Kích thước icon
+ICON_SIZE = 32  # Kích thước icon
+ICON_SIZE_SMALL = 28  # Kích thước icon nhỏ
 DEFAULT_FONT = "sans"
 DEFAULT_FONTSIZE = 16
 
@@ -37,11 +38,12 @@ BAR_MARGIN = [5, 8, 0, 8]  # [Top, Right, Bottom, Left]
 SYSTRAY_ICON_SIZE = 24
 
 # Widget settings
-WIDGET_PADDING = 14  # Padding cho các widget
-WIDGET_PADDING_SMALL = 10  # Padding nhỏ hơn cho một số widget
+WIDGET_PADDING = 8  # Padding cho các widget
+WIDGET_PADDING_SMALL = 4  # Padding nhỏ hơn cho một số widget
+WIDGET_PADDING_LARGE = 20  # Padding lớn hơn cho một số widget
 WIDGET_GROUPBOX_FONTSIZE = 20  # Kích thước font cho GroupBox
 WIDGET_SEPARATOR_LINEWIDTH = 1  # Độ rộng của đường phân cách
-WIDGET_UPDATE_INTERVAL = 2.0  # Tần suất cập nhật widget (giây)
+WIDGET_UPDATE_INTERVAL = 5.0  # Tần suất cập nhật widget (giây)
 WIDGET_BATTERY_UPDATE_INTERVAL = 30  # Tần suất cập nhật pin (giây)
 WIDGET_MAX_CHARS = 50  # Số ký tự tối đa cho WindowName
 
