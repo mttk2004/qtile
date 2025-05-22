@@ -16,10 +16,13 @@ set selected (printf "%s\n" $options | rofi -theme ~/.config/qtile/themes/rofi/m
 # Thực hiện hành động tương ứng
 switch "$selected"
     case "  Capture Full Screen"
+        sleep 0.3  # Thêm delay để menu kịp đóng
         ksnip -f -p $save_path
     case "  Capture Selected Area"
+        sleep 0.3  # Thêm delay để menu kịp đóng
         ksnip -r -p $save_path
     case "  Capture Current Window"
+        sleep 0.3  # Thêm delay để menu kịp đóng
         ksnip -a -p $save_path
     case "*"
         # Không làm gì cả khi hủy
