@@ -34,11 +34,8 @@ def open_btop():
 
 def open_powermenu():
     """Mở power menu."""
-    qtile.cmd_spawn(f"{SCRIPTS_DIR}powermenu.sh")
-
-def open_screenshot_menu():
-    """Mở menu chụp màn hình."""
-    qtile.cmd_spawn(f"{SCRIPTS_DIR}ksnipmenu.sh")
+    script_path = os.path.expanduser(f"{SCRIPTS_DIR}powermenu.sh")
+    subprocess.Popen([script_path])
 
 def init_widgets_defaults():
     """Khởi tạo các giá trị mặc định cho widgets."""
