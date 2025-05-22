@@ -116,6 +116,7 @@ def init_widgets_list():
 
         # Window Name
         widget.WindowName(
+            font=FONT_FAMILY,
             format="{name}",
             max_chars=WIDGET_MAX_CHARS,
             empty_group_string="Desktop",
@@ -151,6 +152,7 @@ def init_widgets_list():
             padding=3,
         ),
         widget.CPU(
+            font=FONT_FAMILY,
             format="{load_percent:.0f}%",
             foreground=colors["fg"],
             padding=WIDGET_PADDING_SMALL,
@@ -167,6 +169,7 @@ def init_widgets_list():
             padding=WIDGET_PADDING,
         ),
         widget.Memory(
+            font=FONT_FAMILY,
             format="{MemUsed:.0f}MB",
             foreground=colors["fg"],
             padding=WIDGET_PADDING_SMALL,
@@ -183,6 +186,7 @@ def init_widgets_list():
             padding=WIDGET_PADDING,
         ),
         widget.Battery(
+            font=FONT_FAMILY,
             format="{percent:2.0%}",
             foreground=colors["fg"],
             padding=WIDGET_PADDING_SMALL,
@@ -205,6 +209,7 @@ def init_widgets_list():
             padding=WIDGET_PADDING,
         ),
         widget.PulseVolume(
+            font=FONT_FAMILY,
             foreground=colors["fg"],
             padding=WIDGET_PADDING_SMALL,
             limit_max_volume=True,
@@ -220,6 +225,7 @@ def init_widgets_list():
         ),
         widget.Backlight(
             backlight_name="amdgpu_bl0",
+            font=FONT_FAMILY,
             format="{percent:2.0%}",
             foreground=colors["fg"],
             padding=WIDGET_PADDING_SMALL,
@@ -243,6 +249,7 @@ def init_widgets_list():
             padding=WIDGET_PADDING,
         ),
         widget.Clock(
+            font=FONT_FAMILY,
             format="%d/%m/%y",
             foreground=colors["fg"],
             padding=WIDGET_PADDING_SMALL,
@@ -257,6 +264,7 @@ def init_widgets_list():
             padding=WIDGET_PADDING,
         ),
         widget.Clock(
+            font=FONT_FAMILY,
             format="%H:%M",
             foreground=colors["fg"],
             padding=WIDGET_PADDING_SMALL,
