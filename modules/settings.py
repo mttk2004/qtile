@@ -13,7 +13,7 @@ from libqtile.core.manager import Qtile
 # -----------------------------------------------------
 MOD = "mod4"  # Windows key
 MOD_ALT = "mod1"  # Alt key
-TERMINAL = "alacritty"
+TERMINAL = "wezterm"
 FILEMANAGER = "thunar"
 APP_LAUNCHER = "rofi -theme ~/.config/qtile/themes/rofi/modern-green-launcher.rasi -show drun -show-icons"
 BROWSER = "firefox"

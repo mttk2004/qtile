@@ -8,7 +8,7 @@ def open_launcher():
     qtile.cmd_spawn(app_launcher)
 
 def open_btop():
-    qtile.cmd_spawn("alacritty --hold -e btop")
+    qtile.cmd_spawn("wezterm --hold -e btop")
 
 def get_battery_status():
     try:
