@@ -148,7 +148,7 @@ def init_widgets_list():
 
         # CPU Widget với icon
         widget.TextBox(
-            text=" 󰘚",  # Icon CPU (nếu có font awesome)
+            text="󰘚",  # Icon CPU (nếu có font awesome)
             foreground=colors["green_primary"],
             fontsize=ICON_SIZE,
         ),
@@ -229,16 +229,9 @@ def init_widgets_list():
             fontsize=FONT_SIZE,
         ),
 
-        # Separator
-        widget.Sep(
-            linewidth=WIDGET_SEPARATOR_LINEWIDTH,
-            padding=WIDGET_PADDING_LARGE,
-            foreground=colors["inactive"],
-        ),
-
         # Date Widget với icon
         widget.TextBox(
-            text="󰸗",  # Icon Calendar (nếu có font awesome)
+            text=" 󰸗",  # Icon Calendar (nếu có font awesome)
             foreground=colors["green_primary"],
             fontsize=ICON_SIZE,
         ),
