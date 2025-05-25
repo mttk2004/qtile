@@ -106,6 +106,7 @@ def init_keys():
         Key([], "XF86MonBrightnessDown", lazy.spawn("brightnessctl s 5%-"), desc='brightness Down'),
 
     ##Misc keybinds
+        Key([], "Print", lazy.spawn(f"fish -c 'flameshot'"), desc='Screenshot with Flameshot'),
         Key([MOD, "control"], "p", lazy.spawn(f"fish -c '{KSNIPMENU_SCRIPT}'"), desc='Screenshot Menu'),
         Key([MOD], "e", lazy.spawn(FILEMANAGER), desc="Open file manager"),
         Key([MOD], "s", toggle_sticky_windows(), desc="Toggle state of sticky for current window"),
