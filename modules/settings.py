@@ -90,7 +90,7 @@ PICOM_CONFIG = f"{SCRIPTS_DIR}picom.conf"
 # -----------------------------------------------------
 # Window manager settings
 FOLLOW_MOUSE_FOCUS = True
-BRING_FRONT_CLICK = False
+BRING_FRONT_CLICK = True
 CURSOR_WARP = False  # This puts your mouse in the center on the screen after you switch to another workspace
 AUTO_FULLSCREEN = True
 FOCUS_ON_WINDOW_ACTIVATION = "smart"  # or focus
