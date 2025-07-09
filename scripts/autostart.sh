@@ -4,16 +4,16 @@
 picom --daemon --config $HOME/.config/qtile/scripts/picom.conf &
 
 # Khởi động polkit-gnome-authentication-agent-1
-(sleep 3 && /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1) &
+sleep 1; /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 
 # Khởi động wired
-(sleep 2 && /usr/bin/wired) &
+sleep 1; /usr/bin/wired &
 
 # Khởi động gnome-keyring-daemon
-eval (gnome-keyring-daemon --start)
+gnome-keyring-daemon --start > /dev/null 2>&1 &
 
 # Khởi động nm-applet
-(sleep 2 && nm-applet) &
+sleep 1; nm-applet &
 
 # Khởi động ibus-daemon
 $HOME/.config/qtile/scripts/ibus.sh &
