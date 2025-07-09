@@ -1,8 +1,5 @@
 #!/bin/fish
 
-# Khởi động feh để hiển thị hình nền
-feh --bg-fill $HOME/.config/qtile/Wallpaper/bird.jpg &
-
 # Khởi động picom với cấu hình từ file picom.conf
 picom --daemon --config $HOME/.config/qtile/scripts/picom.conf &
 
