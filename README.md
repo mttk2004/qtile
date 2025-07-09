@@ -72,12 +72,40 @@ Chỉnh sửa file `modules/layouts_modern.py` để thay đổi các layout c�
 
 ## Phím tắt
 
-- `Mod+Enter`: Mở terminal
-- `Mod+w`: Đóng cửa sổ hiện tại
-- `Mod+Tab`: Chuyển đổi giữa các layout
-- `Mod+[1-9]`: Chuyển đổi giữa các workspace
-- `Mod+Shift+[1-9]`: Di chuyển cửa sổ hiện tại đến workspace khác
-- `Mod+h/j/k/l`: Di chuyển giữa các cửa sổ
-- `Mod+Shift+h/j/k/l`: Thay đổi kích thước cửa sổ
-- `Mod+Ctrl+r`: Khởi động lại Qtile
-- `Mod+Ctrl+q`: Đăng xuất khỏi Qtile
+## Phím tắt
+
+| Phím tắt           | Mô tả                                     |
+| :----------------- | :---------------------------------------- |
+| `Mod + Enter`      | Mở terminal                               |
+| `Mod + w`          | Đóng cửa sổ hiện tại                      |
+| `Mod + Tab`        | Chuyển đổi giữa các layout                |
+| `Mod + [1-9]`      | Chuyển đổi giữa các workspace             |
+| `Mod + Shift + [1-9]` | Di chuyển cửa sổ hiện tại đến workspace khác |
+| `Mod + h/j/k/l`    | Di chuyển giữa các cửa sổ                 |
+| `Mod + Shift + h/j/k/l` | Thay đổi kích thước cửa sổ               |
+| `Mod + Shift + f`  | Bật/tắt chế độ nổi của cửa sổ             |
+| `Mod + c`          | Căn giữa cửa sổ nổi                       |
+| `Mod + f`          | Bật/tắt chế độ toàn màn hình              |
+| `Mod + d`          | Mở trình khởi chạy ứng dụng (Rofi)        |
+| `Mod + c, r`       | Khởi động lại Qtile                       |
+| `Mod + c, q`       | Đăng xuất khỏi Qtile                      |
+| `Mod + c, p`       | Mở menu nguồn                             |
+| `Mod + Print`      | Chụp màn hình với Flameshot               |
+| `Mod + Ctrl + p`   | Mở menu chụp màn hình (Ksnip)             |
+| `Mod + e`          | Mở trình quản lý tệp (Thunar)             |
+| `Mod + s`          | Bật/tắt chế độ sticky cho cửa sổ hiện tại |
+| `Mod + g`          | Mở trình quay màn hình GPU                |
+| `Mod + Alt + Left` | Chuyển đến workspace trước đó             |
+| `Mod + Alt + Right`| Chuyển đến workspace tiếp theo            |
+| `Mod + F10`        | Bật/tắt scratchpad monitor                |
+| `Mod + F11`        | Bật/tắt scratchpad terminal               |
+| `Mod + F12`        | Bật/tắt scratchpad file manager           |
+| `XF86AudioRaiseVolume` | Tăng âm lượng                           |
+| `XF86AudioLowerVolume` | Giảm âm lượng                           |
+| `XF86AudioMute`    | Tắt/bật tiếng                             |
+| `XF86AudioPlay`    | Phát/tạm dừng nhạc                        |
+| `XF86AudioPrev`    | Bài hát trước                             |
+| `XF86AudioNext`    | Bài hát tiếp theo                         |
+| `XF86MonBrightnessUp` | Tăng độ sáng màn hình                    |
+| `XF86MonBrightnessDown` | Giảm độ sáng màn hình                    |
+| `XF86TouchpadToggle` | Bật/tắt touchpad                         |
