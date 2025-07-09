@@ -72,25 +72,25 @@ Chỉnh sửa file `modules/layouts_modern.py` để thay đổi các layout c�
 
 ## Phím tắt
 
-## Phím tắt
-
 | Phím tắt           | Mô tả                                     |
 | :----------------- | :---------------------------------------- |
 | `Mod + Enter`      | Mở terminal                               |
-| `Mod + w`          | Đóng cửa sổ hiện tại                      |
-| `Mod + Tab`        | Chuyển đổi giữa các layout                |
+| `Mod + q`          | Đóng cửa sổ hiện tại                      |
+| `Mod + Tab`        | Chuyển đổi cửa sổ với Rofi                |
+| `Mod + Shift + Tab`| Chuyển đổi giữa các layout                |
 | `Mod + [1-9]`      | Chuyển đổi giữa các workspace             |
 | `Mod + Shift + [1-9]` | Di chuyển cửa sổ hiện tại đến workspace khác |
 | `Mod + h/j/k/l`    | Di chuyển giữa các cửa sổ                 |
-| `Mod + Shift + h/j/k/l` | Thay đổi kích thước cửa sổ               |
+| `Mod + Shift + h/j/k/l` | Di chuyển cửa sổ                      |
+| `Mod + Ctrl + h/j/k/l`  | Thay đổi kích thước cửa sổ            |
 | `Mod + Shift + f`  | Bật/tắt chế độ nổi của cửa sổ             |
-| `Mod + c`          | Căn giữa cửa sổ nổi                       |
+| `Mod + Shift + c`  | Căn giữa cửa sổ nổi                       |
 | `Mod + f`          | Bật/tắt chế độ toàn màn hình              |
 | `Mod + d`          | Mở trình khởi chạy ứng dụng (Rofi)        |
 | `Mod + c, r`       | Khởi động lại Qtile                       |
 | `Mod + c, q`       | Đăng xuất khỏi Qtile                      |
 | `Mod + c, p`       | Mở menu nguồn                             |
-| `Mod + Print`      | Chụp màn hình với Flameshot               |
+| `Print`            | Chụp màn hình với Flameshot               |
 | `Mod + Ctrl + p`   | Mở menu chụp màn hình (Ksnip)             |
 | `Mod + e`          | Mở trình quản lý tệp (Thunar)             |
 | `Mod + s`          | Bật/tắt chế độ sticky cho cửa sổ hiện tại |

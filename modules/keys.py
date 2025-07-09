@@ -50,7 +50,7 @@ def init_keys():
         Key([MOD], "n", lazy.layout.normalize(), desc="Reset all window sizes"),
         Key([MOD], "f", lazy.window.toggle_fullscreen(), desc="Toggle focused window to fullscreen"),
         Key([MOD, "shift"], "f", lazy.window.toggle_floating(), desc="Toggle floating"),
-        Key([MOD], "c", lazy.window.center(), desc="Center floating window"),
+        Key([MOD, "shift"], "c", lazy.window.center(), desc="Center floating window"),
         # Toggle between split and unsplit sides of stack.
         # Split = all windows displayed
         # Unsplit = 1 window displayed, like Max layout, but still with
@@ -62,7 +62,7 @@ def init_keys():
             desc="Toggle between split and unsplit sides of stack",
         ),
         Key([MOD], "Return", lazy.spawn(TERMINAL), desc="Launch terminal"),
-        Key([MOD], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
+        Key([MOD, "shift"], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
 
         # Window switcher
         Key([MOD], "Tab", lazy.spawn("rofi -theme ~/.config/qtile/themes/rofi/modern-green-window.rasi -show window -show-icons"), desc="Switch windows with Rofi"),

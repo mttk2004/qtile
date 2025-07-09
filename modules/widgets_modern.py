@@ -154,6 +154,7 @@ def _init_system_info_widgets():
             fontsize=ICON_SIZE,
         ),
         widget.CheckUpdates(
+            font=FONT_FAMILY,
             distro="Arch_checkupdates", # Hoặc "Arch" nếu bạn dùng checkupdates
             display_format="{updates} Updates",
             no_update_string="Hệ thống đã cập nhật",
@@ -281,8 +282,8 @@ def init_secondary_widgets_list():
     """Khởi tạo danh sách widgets cho màn hình thứ hai."""
     # Bắt đầu với danh sách widget đầy đủ
     widgets_list = init_widgets_list()
-    
+
     # Tạo một danh sách mới không có Systray
     secondary_widgets = [w for w in widgets_list if not isinstance(w, widget.Systray)]
-    
+
     return secondary_widgets
