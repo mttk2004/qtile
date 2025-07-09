@@ -85,8 +85,12 @@ def init_keys():
         Key([MOD], "Tab", lazy.spawn("rofi -theme ~/.config/qtile/themes/rofi/modern-green-window.rasi -show window -show-icons"), desc="Switch windows with Rofi"),
 
         Key([MOD], "q", lazy.window.kill(), desc="Kill focused window"),
-        Key([MOD, "control"], "r", lazy.reload_config(), desc="Reload the config"),
-        Key([MOD, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
+        # System Controls KeyChord
+        KeyChord([MOD], "c", [
+            Key([], "r", lazy.reload_config(), desc="Reload the config"),
+            Key([], "q", lazy.shutdown(), desc="Shutdown Qtile"),
+            Key([], "p", lazy.spawn(f"fish -c '{POWERMENU_SCRIPT}'"), desc="Show power menu"),
+        ], name="System"),
         Key([MOD], "d", lazy.spawn(APP_LAUNCHER), desc="Open application launcher"),
 
         # Chuyển đổi giữa các workspace liền kề
@@ -109,7 +113,6 @@ def init_keys():
         Key([MOD, "control"], "p", lazy.spawn(f"fish -c '{KSNIPMENU_SCRIPT}'"), desc='Screenshot Menu'),
         Key([MOD], "e", lazy.spawn(FILEMANAGER), desc="Open file manager"),
         Key([MOD], "s", toggle_sticky_windows(), desc="Toggle state of sticky for current window"),
-        Key([MOD], "x", lazy.spawn(f"fish -c '{POWERMENU_SCRIPT}'"), desc="Show power menu"),
         Key([MOD], "g", lazy.spawn(GPU_SCREEN_RECORDER), desc="Open GPU Screen Recorder"),
     ]
 
