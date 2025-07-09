@@ -19,25 +19,7 @@ def toggle_sticky_windows(qtile, window=None):
         STICKY_WINDOWS.append(window)
     return window
 
-@lazy.function
-def switch_to_prev_group(qtile):
-    """Chuyển đến workspace trước đó"""
-    current_group_index = qtile.groups.index(qtile.current_group)
-    # Nếu đang ở workspace đầu tiên, chuyển đến workspace cuối cùng
-    if current_group_index == 0:
-        qtile.current_screen.set_group(qtile.groups[-1])
-    else:
-        qtile.current_screen.set_group(qtile.groups[current_group_index - 1])
 
-@lazy.function
-def switch_to_next_group(qtile):
-    """Chuyển đến workspace tiếp theo"""
-    current_group_index = qtile.groups.index(qtile.current_group)
-    # Nếu đang ở workspace cuối cùng, chuyển đến workspace đầu tiên
-    if current_group_index == len(qtile.groups) - 1:
-        qtile.current_screen.set_group(qtile.groups[0])
-    else:
-        qtile.current_screen.set_group(qtile.groups[current_group_index + 1])
 
 def init_keys():
     keys = [
@@ -95,8 +77,8 @@ def init_keys():
         Key([MOD], "d", lazy.spawn(APP_LAUNCHER), desc="Open application launcher"),
 
         # Chuyển đổi giữa các workspace liền kề
-        Key([MOD, "mod1"], "Left", switch_to_prev_group(), desc="Chuyển đến workspace bên trái"),
-        Key([MOD, "mod1"], "Right", switch_to_next_group(), desc="Chuyển đến workspace bên phải"),
+        Key([MOD, "mod1"], "Left", lazy.screen.prev_group(), desc="Chuyển đến workspace bên trái"),
+        Key([MOD, "mod1"], "Right", lazy.screen.next_group(), desc="Chuyển đến workspace bên phải"),
 
     ##CUSTOM
         Key([], "XF86AudioRaiseVolume", lazy.spawn("pactl set-sink-volume 0 +1%"), desc='Volume Up'),
