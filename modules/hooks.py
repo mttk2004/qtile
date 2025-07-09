@@ -12,10 +12,14 @@ from modules.settings import STICKY_WINDOWS, AUTOSTART_SCRIPT
 
 @hook.subscribe.setgroup
 def move_sticky_windows():
-    """Di chuyển các cửa sổ sticky khi chuyển workspace."""
+    """
+    Di chuyển các cửa sổ sticky đến group hiện tại.
+    Chỉ di chuyển nếu cửa sổ không có trong group.
+    """
+    current_group = qtile.current_group
     for window in STICKY_WINDOWS:
-        window.togroup()
-    return
+        if window.group is not current_group:
+            window.togroup(current_group.name)
 
 @hook.subscribe.client_killed
 def remove_sticky_windows(window):
