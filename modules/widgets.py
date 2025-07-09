@@ -1,7 +1,8 @@
 from libqtile import widget, qtile
 import subprocess
 
-from modules.settings import theme, font_family, font_size, default_font, default_fontsize, assets_dir, icons_dir, app_launcher
+from modules.settings import font_family, font_size, default_font, default_fontsize, assets_dir, icons_dir, app_launcher
+from themes.colors import colors
 
 # Utility functions
 def open_launcher():
@@ -40,12 +41,12 @@ def init_widgets_list():
     widgets_list = [
         widget.Spacer(
             length=18,
-            background=theme["background"],
+            background=colors["bar_bg"],
         ),
 
         widget.Image(
             filename=f'{assets_dir}launch_Icon.png',
-            background=theme["background"],
+            background=colors["bar_bg"],
             mouse_callbacks={'Button1': open_launcher},
         ),
 
@@ -57,13 +58,13 @@ def init_widgets_list():
             fontsize=16,
             borderwidth=0,
             highlight_method='block',
-            active=theme["active"],  # Active workspaces circle color
-            block_highlight_text_color=theme["highlight"],  # Current workspace circle color
+            active=colors["active"],  # Active workspaces circle color
+            block_highlight_text_color=colors["highlight"],  # Current workspace circle color
             highlight_color='#4B427E',
-            inactive=theme["inactive"],  # Empty workspace circle
-            foreground=theme["foreground"],
-            background=theme["foreground"],
-            this_current_screen_border=theme["current_screen_border"],  # Circle background color
+            inactive=colors["inactive"],  # Empty workspace circle
+            foreground=colors["bar_fg"],
+            background=colors["bar_fg"],
+            this_current_screen_border=colors["this_current"],  # Circle background color
             this_screen_border='#52548D',
             other_current_screen_border='#52548D',
             other_screen_border='#52548D',
@@ -81,13 +82,13 @@ def init_widgets_list():
         ),
 
         widget.CurrentLayoutIcon(
-            background=theme["foreground"],
+            background=colors["bar_fg"],
             padding=4,
             scale=0.5,
         ),
 
         widget.CurrentLayout(
-            background=theme["foreground"],
+            background=colors["bar_fg"],
             font=font_family,
             fontsize=font_size,
             padding=0,
@@ -102,7 +103,7 @@ def init_widgets_list():
         ),
 
         widget.WindowName(
-            background=theme["foreground"],
+            background=colors["bar_fg"],
             format="{name}",
             font=font_family,
             fontsize=14,
@@ -120,7 +121,7 @@ def init_widgets_list():
         ),
 
         widget.Systray(
-            background=theme["foreground"],
+            background=colors["bar_fg"],
             icon_size=24,
             padding=3,
         ),
@@ -136,7 +137,7 @@ def init_widgets_list():
 
         widget.Spacer(
             length=0,
-            background=theme["foreground"],
+            background=colors["bar_fg"],
         ),
 
         # Nhóm thông tin hệ thống: CPU, RAM, Pin, Độ sáng, Âm lượng
@@ -145,13 +146,13 @@ def init_widgets_list():
             font=font_family,
             fontsize=font_size,
             padding=0,
-            background=theme["foreground"],
+            background=colors["bar_fg"],
             mouse_callbacks={'Button1': open_btop},
         ),
 
         widget.Spacer(
             length=6,
-            background=theme["foreground"],
+            background=colors["bar_fg"],
         ),
 
         widget.CPU(
@@ -160,13 +161,13 @@ def init_widgets_list():
             fontsize=font_size,
             margin=0,
             padding=0,
-            background=theme["foreground"],
+            background=colors["bar_fg"],
             mouse_callbacks={'Button1': open_btop},
         ),
 
         widget.Spacer(
             length=6,
-            background=theme["foreground"],
+            background=colors["bar_fg"],
         ),
 
         # Alternative battery widget if Battery widget doesn't work
@@ -180,7 +181,7 @@ def init_widgets_list():
         # ),
 
         widget.Battery(
-            background=theme["foreground"],
+            background=colors["bar_fg"],
             font=font_family,
             fontsize=font_size,
             format='🔋{percent:2.0%}',
@@ -195,7 +196,7 @@ def init_widgets_list():
 
         widget.Spacer(
             length=6,
-            background=theme["foreground"],
+            background=colors["bar_fg"],
         ),
 
         # Alternative brightness widget if Backlight widget doesn't work
@@ -209,7 +210,7 @@ def init_widgets_list():
         # ),
 
         widget.Backlight(
-            background=theme["foreground"],
+            background=colors["bar_fg"],
             font=font_family,
             fontsize=font_size,
             backlight_name='amdgpu_bl0',
@@ -221,12 +222,12 @@ def init_widgets_list():
 
         widget.Spacer(
             length=6,
-            background=theme["foreground"],
+            background=colors["bar_fg"],
         ),
 
         widget.Image(
             filename=f'{icons_dir}volume.svg',
-            background=theme["foreground"],
+            background=colors["bar_fg"],
             margin_y=3,
             scale=True,
             mouse_callbacks={'Button1': open_btop},
@@ -234,14 +235,14 @@ def init_widgets_list():
 
         widget.Spacer(
             length=4,
-            background=theme["foreground"],
+            background=colors["bar_fg"],
         ),
 
         widget.PulseVolume(
             font=font_family,
             fontsize=font_size,
             padding=0,
-            background=theme["foreground"],
+            background=colors["bar_fg"],
         ),
 
         widget.Image(
@@ -255,19 +256,19 @@ def init_widgets_list():
 
         widget.Image(
             filename=f'{icons_dir}calendar.svg',
-            background=theme["foreground"],
+            background=colors["bar_fg"],
             margin_y=3,
             scale=True,
         ),
 
         widget.Spacer(
             length=6,
-            background=theme["foreground"],
+            background=colors["bar_fg"],
         ),
 
         widget.Clock(
             format='%d/%m/%y ',  # Here you can change between USA or another timezone
-            background=theme["foreground"],
+            background=colors["bar_fg"],
             font=font_family,
             fontsize=font_size,
             padding=0,
@@ -275,7 +276,7 @@ def init_widgets_list():
 
         widget.Image(
             filename=f'{icons_dir}clock.svg',
-            background=theme["foreground"],
+            background=colors["bar_fg"],
             margin_y=3,
             margin_x=5,
             scale=True,
@@ -283,7 +284,7 @@ def init_widgets_list():
 
         widget.Clock(
             format='%H:%M',
-            background=theme["foreground"],
+            background=colors["bar_fg"],
             font=font_family,
             fontsize=font_size,
             padding=0,
@@ -291,7 +292,7 @@ def init_widgets_list():
 
         widget.Spacer(
             length=18,
-            background=theme["foreground"],
+            background=colors["bar_fg"],
         ),
     ]
     return widgets_list

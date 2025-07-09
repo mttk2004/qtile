@@ -105,57 +105,6 @@ REDSHIFT_TEMP_DAY = 6500  # Nhiệt độ màu ban ngày (Kelvin)
 # Sticky window settings
 STICKY_WINDOWS: List[Any] = []  # Danh sách cửa sổ sticky
 
-# -----------------------------------------------------
-# BACKWARD COMPATIBILITY - Tương thích ngược với code cũ
-# -----------------------------------------------------
-# Giữ lại các biến cũ để không phải sửa nhiều code
-mod = MOD
-mod1 = MOD_ALT
-terminal = TERMINAL
-filemanager = FILEMANAGER
-app_launcher = APP_LAUNCHER
-browser = BROWSER
-editor = EDITOR
-music_player = MUSIC_PLAYER
-gpu_screen_recorder = GPU_SCREEN_RECORDER
 
-font_family = FONT_FAMILY
-font_size = FONT_SIZE
-default_font = DEFAULT_FONT
-default_fontsize = DEFAULT_FONTSIZE
-bar_height = BAR_HEIGHT
-bar_margin = BAR_MARGIN
-systray_icon_size = SYSTRAY_ICON_SIZE
 
-assets_dir = ASSETS_DIR
-icons_dir = ICONS_DIR
-wallpapers_dir = WALLPAPERS_DIR
-default_wallpaper = DEFAULT_WALLPAPER
 
-scripts_dir = SCRIPTS_DIR
-powermenu_script = POWERMENU_SCRIPT
-ksnipmenu_script = KSNIPMENU_SCRIPT
-autostart_script = AUTOSTART_SCRIPT
-redshift_script = REDSHIFT_SCRIPT
-ibus_script = IBUS_SCRIPT
-toggle_config_script = TOGGLE_CONFIG_SCRIPT
-picom_config = PICOM_CONFIG
-
-redshift_temp_night = REDSHIFT_TEMP_NIGHT
-redshift_temp_day = REDSHIFT_TEMP_DAY
-
-sticky_windows = STICKY_WINDOWS
-
-# Bảng màu chính (sử dụng từ themes/colors.py)
-# Được giữ lại để tương thích với code cũ
-theme: Dict[str, str] = {
-    "background": "#033C4B",
-    "foreground": "#046F5F",
-    "focus": "#00DC6C",
-    "normal": "#1F1D2E",
-    "highlight": "#00F076",
-    "active": "#56D9C7",
-    "inactive": "#052A25",
-    "current_screen_border": "#00361A",
-    "other_screen_border": "#52548D",
-}

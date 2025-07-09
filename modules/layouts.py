@@ -1,43 +1,43 @@
 from libqtile import layout
 from libqtile.config import Match
 
-from modules.settings import theme
+from themes.colors import colors
 
 def init_layouts():
     layouts = [
         layout.Columns(
             margin=0,
-            border_focus=theme["focus"],
-            border_normal=theme["normal"],
+            border_focus=colors["border_focus"],
+            border_normal=colors["border_normal"],
             border_width=3,
         ),
         layout.Max(
-            border_focus=theme["focus"],
-            border_normal=theme["normal"],
+            border_focus=colors["border_focus"],
+            border_normal=colors["border_normal"],
             margin=0,
             border_width=0,
         ),
         layout.Floating(
-            border_focus=theme["focus"],
-            border_normal=theme["normal"],
+            border_focus=colors["border_focus"],
+            border_normal=colors["border_normal"],
             margin=0,
             border_width=3,
         ),
         layout.Matrix(
-            border_focus=theme["focus"],
-            border_normal=theme["normal"],
+            border_focus=colors["border_focus"],
+            border_normal=colors["border_normal"],
             margin=0,
             border_width=3,
         ),
         layout.MonadWide(
-            border_focus=theme["focus"],
-            border_normal=theme["normal"],
+            border_focus=colors["border_focus"],
+            border_normal=colors["border_normal"],
             margin=0,
             border_width=3,
         ),
         layout.Tile(
-            border_focus=theme["focus"],
-            border_normal=theme["normal"],
+            border_focus=colors["border_focus"],
+            border_normal=colors["border_normal"],
             margin=0,
             border_width=3,
         ),
@@ -46,8 +46,8 @@ def init_layouts():
 
 def init_floating_layout():
     floating_layout = layout.Floating(
-        border_focus=theme["focus"],
-        border_normal=theme["normal"],
+        border_focus=colors["border_focus"],
+        border_normal=colors["border_normal"],
         border_width=3,
         float_rules=[
             # Run the utility of `xprop` to see the wm class and name of an X client.

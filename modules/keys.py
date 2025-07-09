@@ -7,9 +7,7 @@ from modules.settings import (
     STICKY_WINDOWS
 )
 
-# Backward compatibility
-mod = MOD
-mod1 = MOD_ALT
+
 
 @lazy.function
 def toggle_sticky_windows(qtile, window=None):
@@ -83,8 +81,8 @@ def init_keys():
         Key([MOD], "Return", lazy.spawn(TERMINAL), desc="Launch terminal"),
         Key([MOD], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
 
-        # Window switcher với Alt+Tab sử dụng Rofi
-        # Key([MOD_ALT], "Tab", lazy.spawn("rofi -theme ~/.config/qtile/themes/rofi/modern-green-window.rasi -show window -show-icons"), desc="Chuyển đổi cửa sổ với Rofi"),
+        # Window switcher
+        Key([MOD], "Tab", lazy.spawn("rofi -theme ~/.config/qtile/themes/rofi/modern-green-window.rasi -show window -show-icons"), desc="Switch windows with Rofi"),
 
         Key([MOD], "q", lazy.window.kill(), desc="Kill focused window"),
         Key([MOD, "control"], "r", lazy.reload_config(), desc="Reload the config"),
@@ -92,8 +90,8 @@ def init_keys():
         Key([MOD], "d", lazy.spawn(APP_LAUNCHER), desc="Open application launcher"),
 
         # Chuyển đổi giữa các workspace liền kề
-        Key([MOD, MOD_ALT], "Left", switch_to_prev_group(), desc="Chuyển đến workspace bên trái"),
-        Key([MOD, MOD_ALT], "Right", switch_to_next_group(), desc="Chuyển đến workspace bên phải"),
+        Key([MOD, "mod1"], "Left", switch_to_prev_group(), desc="Chuyển đến workspace bên trái"),
+        Key([MOD, "mod1"], "Right", switch_to_next_group(), desc="Chuyển đến workspace bên phải"),
 
     ##CUSTOM
         Key([], "XF86AudioRaiseVolume", lazy.spawn("pactl set-sink-volume 0 +1%"), desc='Volume Up'),
@@ -104,6 +102,7 @@ def init_keys():
         Key([], "XF86AudioNext", lazy.spawn("playerctl next"), desc='playerctl'),
         Key([], "XF86MonBrightnessUp", lazy.spawn("brightnessctl s 5%+"), desc='brightness UP'),
         Key([], "XF86MonBrightnessDown", lazy.spawn("brightnessctl s 5%-"), desc='brightness Down'),
+        Key([], "XF86TouchpadToggle", lazy.spawn("sh -c 'xinput --list-props \"$(xinput --list --name-only | grep -i Touchpad)\" | grep \"Device Enabled\" | awk \'\{print $NF\}\' | xargs -I {} xinput --set-prop \"$(xinput --list --name-only | grep -i Touchpad)\" \"Device Enabled\" $((1-{}))'"), desc="Toggle touchpad"),
 
     ##Misc keybinds
         Key([], "Print", lazy.spawn(f"fish -c 'flameshot'"), desc='Screenshot with Flameshot'),

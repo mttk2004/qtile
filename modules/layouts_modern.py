@@ -23,6 +23,7 @@ def init_layouts():
     layouts = [
         # Layout Columns - Bố cục cột, phù hợp cho nhiều cửa sổ
         layout.Columns(
+            name="Cột",
             border_focus=colors["border_focus"],
             border_normal=colors["border_normal"],
             border_width=LAYOUT_BORDER_WIDTH,
@@ -34,10 +35,11 @@ def init_layouts():
         ),
 
         # Layout Max - Phóng to cửa sổ hiện tại
-        layout.Max(),
+        layout.Max(name="Toàn màn hình"),
 
         # Layout MonadTall - Bố cục cửa sổ chính ở bên trái, các cửa sổ khác ở bên phải
         layout.MonadTall(
+            name="Monad Cao",
             border_focus=colors["border_focus"],
             border_normal=colors["border_normal"],
             border_width=LAYOUT_BORDER_WIDTH,
@@ -50,6 +52,7 @@ def init_layouts():
 
         # Layout MonadWide - Bố cục cửa sổ chính ở trên, các cửa sổ khác ở dưới
         layout.MonadWide(
+            name="Monad Rộng",
             border_focus=colors["border_focus"],
             border_normal=colors["border_normal"],
             border_width=LAYOUT_BORDER_WIDTH,
@@ -58,15 +61,11 @@ def init_layouts():
         ),
 
         # Layout Matrix - Bố cục dạng lưới
-        layout.Matrix(
-            border_focus=colors["border_focus"],
-            border_normal=colors["border_normal"],
-            border_width=LAYOUT_BORDER_WIDTH,
-            margin=LAYOUT_MARGIN,
-        ),
+        layout.Matrix(name="Lưới", border_focus=colors["border_focus"], border_normal=colors["border_normal"], border_width=LAYOUT_BORDER_WIDTH, margin=LAYOUT_MARGIN),
 
         # Layout TreeTab - Bố cục dạng cây
         layout.TreeTab(
+            name="Cây",
             active_bg=colors["green_primary"],
             active_fg=colors["bg"],
             bg_color=colors["bg"],

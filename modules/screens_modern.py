@@ -7,6 +7,7 @@ Sử dụng widgets hiện đại từ widgets_modern.py và cài đặt từ se
 from libqtile.config import Screen
 from libqtile import bar
 import os
+import subprocess
 
 from modules.settings import BAR_HEIGHT, BAR_MARGIN, DEFAULT_WALLPAPER
 from modules.widgets_modern import init_widgets_list, init_secondary_widgets_list
@@ -39,19 +40,10 @@ def init_screens():
     ]
 
     # Thêm màn hình thứ hai nếu có
-    # Kiểm tra xem có màn hình thứ hai không bằng cách kiểm tra xrandr hoặc các file trong /sys/class/drm
-    connected_displays = []
     try:
-        # Kiểm tra các card màn hình đã kết nối
-        for card in os.listdir("/sys/class/drm"):
-            card_path = f"/sys/class/drm/{card}/status"
-            if os.path.isfile(card_path):
-                with open(card_path, "r") as f:
-                    if f.read().strip() == "connected":
-                        connected_displays.append(card)
-
-        # Nếu có nhiều hơn 1 màn hình đã kết nối
-        if len(connected_displays) > 1:
+        output = subprocess.check_output(["xrandr"]).decode("utf-8")
+        num_screens = len([line for line in output.splitlines() if " connected " in line])
+        if num_screens > 1:
             screens.append(
                 Screen(
                     top=bar.Bar(
@@ -62,8 +54,8 @@ def init_screens():
                     wallpaper_mode="fill",
                 )
             )
-    except (FileNotFoundError, IOError, OSError):
-        # Nếu không thể kiểm tra, chỉ sử dụng một màn hình
+    except (FileNotFoundError, subprocess.CalledProcessError):
+        # Bỏ qua nếu xrandr không tồn tại hoặc có lỗi
         pass
 
     return screens
