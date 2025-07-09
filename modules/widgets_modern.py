@@ -19,7 +19,7 @@ from modules.settings import (
 # Đường dẫn đến thư mục icons
 ICONS_PATH = os.path.expanduser(ICONS_DIR)
 
-# Utility functions
+# --- Utility functions ---
 def open_launcher():
     """Mở app launcher."""
     qtile.cmd_spawn(APP_LAUNCHER)
@@ -37,6 +37,7 @@ def open_powermenu():
     script_path = os.path.expanduser(f"{SCRIPTS_DIR}powermenu.sh")
     subprocess.Popen([script_path])
 
+# --- Widget Defaults ---
 def init_widgets_defaults():
     """Khởi tạo các giá trị mặc định cho widgets."""
     return dict(
@@ -47,25 +48,10 @@ def init_widgets_defaults():
         foreground=colors["fg"],
     )
 
-def init_widgets_list():
-    """Khởi tạo danh sách widgets cho bar."""
-    widgets_list = [
-        # Logo/Menu button
-        # widget.TextBox(
-        #     text=" ",  # Icon cho menu (nếu có font awesome)
-        #     foreground=colors["green_accent"],
-        #     fontsize=ICON_SIZE,
-        #     padding=WIDGET_PADDING,
-        #     mouse_callbacks={'Button1': open_launcher},
-        # ),
+# --- Helper functions for creating widget groups ---
 
-        # Separator
-        # widget.Sep(
-        #     linewidth=0,
-        #     padding=WIDGET_PADDING,
-        # ),
-
-        # Group Box - Hiển thị các workspace
+def _init_groupbox_widgets():
+    return [
         widget.GroupBox(
             font=FONT_FAMILY,
             fontsize=WIDGET_GROUPBOX_FONTSIZE,
@@ -87,36 +73,20 @@ def init_widgets_list():
             urgent_text=colors["error"],
             disable_drag=True,
         ),
+    ]
 
-        # Separator
-        widget.Sep(
-            linewidth=WIDGET_SEPARATOR_LINEWIDTH,
-            padding=WIDGET_PADDING_LARGE,
-            foreground=colors["inactive"],
-        ),
-
-        # Current Layout Icon
-        # widget.CurrentLayoutIcon(
-        #     scale=0.5,
-        #     padding=0,
-        # ),
-
-        # Current Layout
+def _init_layout_widgets():
+    return [
         widget.CurrentLayout(
             font=FONT_FAMILY,
             padding=WIDGET_PADDING_SMALL,
             foreground=colors["green_light"],
             fontsize=FONT_SIZE,
         ),
+    ]
 
-        # Separator
-        widget.Sep(
-            linewidth=WIDGET_SEPARATOR_LINEWIDTH,
-            padding=WIDGET_PADDING_LARGE,
-            foreground=colors["inactive"],
-        ),
-
-        # Window Name
+def _init_window_name_widget():
+    return [
         widget.WindowName(
             font=FONT_FAMILY,
             format="{name}",
@@ -126,29 +96,19 @@ def init_widgets_list():
             padding=WIDGET_PADDING,
             fontsize=FONT_SIZE,
         ),
+    ]
 
-        # Separator
-        widget.Sep(
-            linewidth=WIDGET_SEPARATOR_LINEWIDTH,
-            padding=WIDGET_PADDING_LARGE,
-            foreground=colors["inactive"],
-        ),
-
-        # Systray
+def _init_systray_widget():
+    return [
         widget.Systray(
             icon_size=SYSTRAY_ICON_SIZE,
         ),
+    ]
 
-        # Separator
-        widget.Sep(
-            linewidth=WIDGET_SEPARATOR_LINEWIDTH,
-            padding=WIDGET_PADDING_LARGE,
-            foreground=colors["inactive"],
-        ),
-
-        # CPU Widget với icon
+def _init_system_info_widgets():
+    return [
         widget.TextBox(
-            text="󰘚",  # Icon CPU (nếu có font awesome)
+            text="󰘚",  # Icon CPU
             foreground=colors["green_primary"],
             fontsize=ICON_SIZE,
         ),
@@ -161,10 +121,8 @@ def init_widgets_list():
             mouse_callbacks={'Button1': open_btop},
             fontsize=FONT_SIZE,
         ),
-
-        # Memory Widget với icon
         widget.TextBox(
-            text=" 󰍛",  # Icon RAM (nếu có font awesome)
+            text=" 󰍛",  # Icon RAM
             foreground=colors["green_primary"],
             fontsize=ICON_SIZE,
             padding=WIDGET_PADDING,
@@ -177,10 +135,12 @@ def init_widgets_list():
             mouse_callbacks={'Button1': open_btop},
             fontsize=FONT_SIZE,
         ),
+    ]
 
-        # Battery Widget với icon
+def _init_device_status_widgets():
+    return [
         widget.TextBox(
-            text=" 󰁹",  # Icon Pin (nếu có font awesome)
+            text=" 󰁹",  # Icon Pin
             foreground=colors["green_primary"],
             fontsize=ICON_SIZE_SMALL,
             padding=WIDGET_PADDING,
@@ -199,10 +159,8 @@ def init_widgets_list():
             low_percentage=0.15,
             fontsize=FONT_SIZE,
         ),
-
-        # Volume Widget với icon
         widget.TextBox(
-            text=" 󰕾",  # Icon Volume (nếu có font awesome)
+            text=" 󰕾",  # Icon Volume
             foreground=colors["green_primary"],
             fontsize=ICON_SIZE,
         ),
@@ -212,10 +170,8 @@ def init_widgets_list():
             limit_max_volume=True,
             fontsize=FONT_SIZE,
         ),
-
-        # Brightness Widget với icon
         widget.TextBox(
-            text=" 󰃠",  # Icon Brightness (nếu có font awesome)
+            text=" 󰃠",  # Icon Brightness
             foreground=colors["green_primary"],
             fontsize=ICON_SIZE,
         ),
@@ -228,10 +184,12 @@ def init_widgets_list():
             step=5,
             fontsize=FONT_SIZE,
         ),
+    ]
 
-        # Date Widget với icon
+def _init_clock_widgets():
+    return [
         widget.TextBox(
-            text=" 󰸗",  # Icon Calendar (nếu có font awesome)
+            text=" 󰸗",  # Icon Calendar
             foreground=colors["green_primary"],
             fontsize=ICON_SIZE,
         ),
@@ -241,10 +199,8 @@ def init_widgets_list():
             foreground=colors["fg"],
             fontsize=FONT_SIZE,
         ),
-
-        # Time Widget với icon
         widget.TextBox(
-            text=" 󰥔",  # Icon Clock (nếu có font awesome)
+            text=" 󰥔",  # Icon Clock
             foreground=colors["green_primary"],
             fontsize=ICON_SIZE,
         ),
@@ -254,30 +210,52 @@ def init_widgets_list():
             foreground=colors["fg"],
             fontsize=FONT_SIZE,
         ),
+    ]
 
-        # Separator
-        widget.Sep(
-            linewidth=WIDGET_SEPARATOR_LINEWIDTH,
-            padding=WIDGET_PADDING_LARGE,
-            foreground=colors["inactive"],
-        ),
-
-        # Power Menu Button
+def _init_power_widget():
+    return [
         widget.TextBox(
-            text="⏻",  # Icon Power (nếu có font awesome)
+            text="⏻",  # Icon Power
             foreground=colors["error"],
             fontsize=ICON_SIZE,
             mouse_callbacks={'Button1': open_powermenu},
         ),
     ]
+
+def _separator():
+    return widget.Sep(
+        linewidth=WIDGET_SEPARATOR_LINEWIDTH,
+        padding=WIDGET_PADDING_LARGE,
+        foreground=colors["inactive"],
+    )
+
+# --- Main Widget Lists ---
+
+def init_widgets_list():
+    """Khởi tạo danh sách widgets cho bar chính."""
+    widgets_list = [
+        *_init_groupbox_widgets(),
+        _separator(),
+        *_init_layout_widgets(),
+        _separator(),
+        *_init_window_name_widget(),
+        _separator(),
+        *_init_systray_widget(),
+        _separator(),
+        *_init_system_info_widgets(),
+        *_init_device_status_widgets(),
+        *_init_clock_widgets(),
+        _separator(),
+        *_init_power_widget(),
+    ]
     return widgets_list
 
 def init_secondary_widgets_list():
     """Khởi tạo danh sách widgets cho màn hình thứ hai."""
-    # Đơn giản hóa widgets cho màn hình thứ hai
+    # Bắt đầu với danh sách widget đầy đủ
     widgets_list = init_widgets_list()
-    # Loại bỏ systray vì chỉ nên hiển thị trên một màn hình
-    for widget in widgets_list:
-        if isinstance(widget, widget.Systray):
-            widgets_list.remove(widget)
-    return widgets_list
+    
+    # Tạo một danh sách mới không có Systray
+    secondary_widgets = [w for w in widgets_list if not isinstance(w, widget.Systray)]
+    
+    return secondary_widgets
