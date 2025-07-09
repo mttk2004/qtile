@@ -113,4 +113,12 @@ def init_keys():
         Key([MOD], "x", lazy.spawn(f"fish -c '{POWERMENU_SCRIPT}'"), desc="Show power menu"),
         Key([MOD], "g", lazy.spawn(GPU_SCREEN_RECORDER), desc="Open GPU Screen Recorder"),
     ]
+
+    # Phím tắt cho Scratchpads
+    keys.extend([
+        Key([MOD], "F12", lazy.group['scratchpad'].dropdown_toggle('files'), desc="Toggle scratchpad file manager"),
+        Key([MOD], "F11", lazy.group['scratchpad'].dropdown_toggle('term'), desc="Toggle scratchpad terminal"),
+        Key([MOD], "F10", lazy.group['scratchpad'].dropdown_toggle('monitor'), desc="Toggle scratchpad system monitor"),
+    ])
+
     return keys
