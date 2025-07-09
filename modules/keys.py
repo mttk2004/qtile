@@ -67,7 +67,8 @@ def init_keys():
         Key([MOD, "control"], "k", lazy.layout.grow_up(), desc="Grow window up"),
         Key([MOD], "n", lazy.layout.normalize(), desc="Reset all window sizes"),
         Key([MOD], "f", lazy.window.toggle_fullscreen(), desc="Toggle focused window to fullscreen"),
-        Key([MOD], "v", lazy.window.toggle_floating(), desc="Toggle focused window to floating"),
+        Key([MOD, "shift"], "f", lazy.window.toggle_floating(), desc="Toggle floating"),
+        Key([MOD], "c", lazy.window.center(), desc="Center floating window"),
         # Toggle between split and unsplit sides of stack.
         # Split = all windows displayed
         # Unsplit = 1 window displayed, like Max layout, but still with
