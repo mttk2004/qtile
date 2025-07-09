@@ -64,7 +64,7 @@ TREETAB_PANEL_WIDTH = 220
 TREETAB_SECTION_TOP = 15
 
 # Group settings
-GROUP_LABELS = ["⬤"] * 9  # Nhãn cho các nhóm
+GROUP_LABELS = ["", "", "", "", "", "", "", "", ""]  # Nhãn cho các nhóm
 
 # -----------------------------------------------------
 # PATHS - Đường dẫn
