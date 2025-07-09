@@ -6,6 +6,7 @@ giúp tập trung quản lý và dễ dàng thay đổi khi cần.
 """
 
 from typing import List, Dict, Any, Union
+from types import FunctionType
 from libqtile.core.manager import Qtile
 
 # -----------------------------------------------------
