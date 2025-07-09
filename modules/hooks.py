@@ -35,4 +35,4 @@ def auto_sticky_windows(window):
 def autostart():
     """Khởi động các ứng dụng khi Qtile khởi động."""
     home = os.path.expanduser(AUTOSTART_SCRIPT)
-    subprocess.call([home])
+    subprocess.Popen([home])
