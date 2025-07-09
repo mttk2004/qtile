@@ -37,6 +37,17 @@ def open_powermenu():
     script_path = os.path.expanduser(f"{SCRIPTS_DIR}powermenu.sh")
     subprocess.Popen([script_path])
 
+def get_backlight_name():
+    """Tự động tìm tên thiết bị backlight."""
+    try:
+        # Lấy danh sách các thiết bị backlight
+        backlight_devices = os.listdir('/sys/class/backlight/')
+        if backlight_devices:
+            return backlight_devices[0]  # Trả về thiết bị đầu tiên tìm thấy
+    except FileNotFoundError:
+        pass
+    return "amdgpu_bl0" # Giá trị dự phòng
+
 # --- Widget Defaults ---
 def init_widgets_defaults():
     """Khởi tạo các giá trị mặc định cho widgets."""
@@ -192,7 +203,7 @@ def _init_device_status_widgets():
             fontsize=ICON_SIZE,
         ),
         widget.Backlight(
-            backlight_name="amdgpu_bl0",
+            backlight_name=get_backlight_name(),
             font=FONT_FAMILY,
             format="{percent:2.0%}",
             foreground=colors["fg"],
