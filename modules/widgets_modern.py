@@ -136,6 +136,21 @@ def _init_system_info_widgets():
             mouse_callbacks={'Button1': open_btop},
             fontsize=FONT_SIZE,
         ),
+        # CheckUpdates Widget
+        widget.TextBox(
+            text="󰏔", # Update icon
+            foreground=colors["green_primary"],
+            fontsize=ICON_SIZE,
+        ),
+        widget.CheckUpdates(
+            distro="Arch_checkupdates", # Hoặc "Arch" nếu bạn dùng checkupdates
+            display_format="{updates} Updates",
+            no_update_string="Hệ thống đã cập nhật",
+            colour_have_updates=colors["warning"],
+            colour_no_updates=colors["fg"],
+            mouse_callbacks={'Button1': lambda: qtile.cmd_spawn(f"{TERMINAL} -e sudo pacman -Syu")},
+            fontsize=FONT_SIZE,
+        ),
     ]
 
 def _init_device_status_widgets():
