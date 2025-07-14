@@ -79,6 +79,7 @@ DEFAULT_WALLPAPER = f"{WALLPAPERS_DIR}bird.jpg"
 # Scripts paths
 SCRIPTS_DIR = "~/.config/qtile/scripts/"
 POWERMENU_SCRIPT = f"{SCRIPTS_DIR}powermenu.sh"
+UPDATEMENU_SCRIPT = f"{SCRIPTS_DIR}updatemenu.sh"
 KSNIPMENU_SCRIPT = f"{SCRIPTS_DIR}ksnipmenu.sh"
 AUTOSTART_SCRIPT = f"{SCRIPTS_DIR}autostart.sh"
 REDSHIFT_SCRIPT = f"{SCRIPTS_DIR}redshift.sh"

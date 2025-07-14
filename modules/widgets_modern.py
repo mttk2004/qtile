@@ -8,6 +8,7 @@ Sử dụng bảng màu từ themes/colors.py.
 from libqtile import widget, qtile
 import subprocess
 import os
+import re
 
 from themes.colors import colors
 from modules.settings import (
@@ -175,22 +176,6 @@ def _init_system_info_widgets():
             foreground=colors["fg"],
             update_interval=WIDGET_UPDATE_INTERVAL,
             mouse_callbacks={'Button1': open_btop},
-            fontsize=FONT_SIZE,
-        ),
-        # CheckUpdates Widget
-        widget.TextBox(
-            text="󰏔", # Update icon
-            foreground=colors["green_primary"],
-            fontsize=ICON_SIZE,
-        ),
-        widget.CheckUpdates(
-            font=FONT_FAMILY,
-            distro="Arch_checkupdates", # Hoặc "Arch" nếu bạn dùng checkupdates
-            display_format="{updates} Updates",
-            no_update_string="Hệ thống đã cập nhật",
-            colour_have_updates=colors["warning"],
-            colour_no_updates=colors["fg"],
-            mouse_callbacks={'Button1': lambda: qtile.cmd_spawn(f"{TERMINAL} -e sudo pacman -Syu")},
             fontsize=FONT_SIZE,
         ),
     ]

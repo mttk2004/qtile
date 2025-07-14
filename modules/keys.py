@@ -2,7 +2,7 @@ from libqtile.config import Key, KeyChord
 from libqtile.lazy import lazy
 
 from modules.settings import (
-    MOD, MOD_ALT, TERMINAL, FILEMANAGER, POWERMENU_SCRIPT,
+    MOD, MOD_ALT, TERMINAL, FILEMANAGER, POWERMENU_SCRIPT, UPDATEMENU_SCRIPT,
     APP_LAUNCHER, GPU_SCREEN_RECORDER, KSNIPMENU_SCRIPT,
     STICKY_WINDOWS
 )
@@ -73,6 +73,7 @@ def init_keys():
             Key([], "r", lazy.reload_config(), desc="Reload the config"),
             Key([], "q", lazy.shutdown(), desc="Shutdown Qtile"),
             Key([], "p", lazy.spawn(f"fish -c '{POWERMENU_SCRIPT}'"), desc="Show power menu"),
+            Key([], "u", lazy.spawn(f"fish -c '{UPDATEMENU_SCRIPT}'"), desc="Show update menu"),
         ], name="System"),
         Key([MOD], "d", lazy.spawn(APP_LAUNCHER), desc="Open application launcher"),
 
