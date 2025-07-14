@@ -48,6 +48,36 @@ def get_backlight_name():
         pass
     return "amdgpu_bl0" # Giá trị dự phòng
 
+def get_volume_pipewire():
+    """Lấy thông tin âm lượng từ PipeWire qua pactl."""
+    try:
+        # Lấy thông tin âm lượng
+        volume_output = subprocess.check_output(
+            ["pactl", "get-sink-volume", "@DEFAULT_SINK@"],
+            text=True
+        ).strip()
+
+        # Parse volume từ output như "Volume: front-left: 32768 /  50% / -18.06 dB"
+        import re
+        volume_match = re.search(r'(\d+)%', volume_output)
+        volume = volume_match.group(1) if volume_match else "0"
+
+        # Kiểm tra trạng thái mute
+        mute_output = subprocess.check_output(
+            ["pactl", "get-sink-mute", "@DEFAULT_SINK@"],
+            text=True
+        ).strip()
+
+        if "yes" in mute_output.lower():
+            return "🔇 Muted"
+        else:
+            return f"{volume}%"
+
+    except subprocess.CalledProcessError:
+        return "N/A"
+    except Exception:
+        return "Error"
+
 # --- Widget Defaults ---
 def init_widgets_defaults():
     """Khởi tạo các giá trị mặc định cho widgets."""
@@ -192,11 +222,20 @@ def _init_device_status_widgets():
             foreground=colors["green_primary"],
             fontsize=ICON_SIZE,
         ),
-        widget.PulseVolume(
+        # Widget Volume tùy chỉnh cho PipeWire
+        # Click chuột trái: toggle mute
+        # Scroll lên/xuống: tăng/giảm âm lượng
+        widget.GenPollText(
             font=FONT_FAMILY,
             foreground=colors["fg"],
-            limit_max_volume=True,
             fontsize=FONT_SIZE,
+            func=lambda: get_volume_pipewire(),
+            update_interval=1,
+            mouse_callbacks={
+                'Button1': lambda: qtile.cmd_spawn("pactl set-sink-mute @DEFAULT_SINK@ toggle"),
+                'Button4': lambda: qtile.cmd_spawn("pactl set-sink-volume @DEFAULT_SINK@ +5%"),
+                'Button5': lambda: qtile.cmd_spawn("pactl set-sink-volume @DEFAULT_SINK@ -5%"),
+            },
         ),
         widget.TextBox(
             text=" 󰃠",  # Icon Brightness
