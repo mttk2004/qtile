@@ -14,46 +14,30 @@ Cấu hình Qtile hiện đại với thiết kế tối giản và hiệu quả
 
 ```
 qtile/
-├── config.py              # File cấu hình hiện tại đang sử dụng
-├── config_modern.py       # Cấu hình hiện đại mới
-├── config_classic.py      # Cấu hình cũ (sao lưu)
+├── config.py              # File cấu hình chính đang sử dụng
 ├── modules/               # Thư mục chứa các module chức năng
 │   ├── keys.py            # Cấu hình phím tắt
 │   ├── groups.py          # Cấu hình nhóm cửa sổ
-│   ├── layouts.py         # Cấu hình bố cục cửa sổ (cũ)
-│   ├── layouts_modern.py  # Cấu hình bố cục cửa sổ hiện đại
-│   ├── screens.py         # Cấu hình màn hình (cũ)
-│   ├── screens_modern.py  # Cấu hình màn hình hiện đại
-│   ├── widgets.py         # Cấu hình widget (cũ)
-│   ├── widgets_modern.py  # Cấu hình widget hiện đại
+│   ├── layouts_modern.py  # Cấu hình bố cục cửa sổ
+│   ├── screens_modern.py  # Cấu hình màn hình
+│   ├── widgets_modern.py  # Cấu hình widget
 │   ├── hooks.py           # Các hook và callback
 │   ├── mouse.py           # Cấu hình chuột
 │   └── settings.py        # Các cài đặt chung
 ├── themes/                # Thư mục chứa theme
 │   ├── __init__.py        # Export theme
-│   └── colors.py          # Định nghĩa màu sắc
+│   ├── colors.py          # Định nghĩa màu sắc
+│   └── rofi/              # Theme rofi
 ├── scripts/               # Scripts tiện ích
 │   ├── autostart.sh       # Script khởi động các ứng dụng
 │   ├── powermenu.sh       # Script menu nguồn
 │   ├── ksnipmenu.sh       # Script menu chụp màn hình
-│   ├── toggle_config.sh   # Script chuyển đổi giữa cấu hình cũ và mới
-│   └── ...
+│   ├── redshift.sh        # Script điều chỉnh màu màn hình
+│   ├── ibus.sh            # Script cấu hình bộ gõ
+│   └── picom.conf         # Cấu hình picom
 ├── Assets/                # Thư mục chứa tài nguyên
+│   └── Bar-Icons/         # Icons cho thanh bar
 └── Wallpaper/             # Thư mục chứa hình nền
-```
-
-## Cách sử dụng
-
-### Chuyển đổi giữa cấu hình cũ và mới
-
-```bash
-./scripts/toggle_config.sh
-```
-
-Sau khi chạy script, khởi động lại Qtile bằng cách nhấn `Mod+Ctrl+R` hoặc chạy lệnh:
-
-```bash
-qtile cmd-obj -o cmd -f restart
 ```
 
 ## Tùy chỉnh

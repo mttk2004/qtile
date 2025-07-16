@@ -84,12 +84,10 @@ DEFAULT_WALLPAPER: Final[str] = f"{WALLPAPERS_DIR}bird.jpg"
 
 # Script paths
 POWERMENU_SCRIPT: Final[str] = f"{SCRIPTS_DIR}powermenu.sh"
-UPDATEMENU_SCRIPT: Final[str] = f"{SCRIPTS_DIR}updatemenu.sh"
 KSNIPMENU_SCRIPT: Final[str] = f"{SCRIPTS_DIR}ksnipmenu.sh"
 AUTOSTART_SCRIPT: Final[str] = f"{SCRIPTS_DIR}autostart.sh"
 REDSHIFT_SCRIPT: Final[str] = f"{SCRIPTS_DIR}redshift.sh"
 IBUS_SCRIPT: Final[str] = f"{SCRIPTS_DIR}ibus.sh"
-TOGGLE_CONFIG_SCRIPT: Final[str] = f"{SCRIPTS_DIR}toggle_config.sh"
 PICOM_CONFIG: Final[str] = f"{SCRIPTS_DIR}picom.conf"
 
 # -----------------------------------------------------
