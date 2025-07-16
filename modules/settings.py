@@ -5,48 +5,50 @@ File này chứa tất cả các biến cấu hình được sử dụng trong t
 giúp tập trung quản lý và dễ dàng thay đổi khi cần.
 """
 
-from typing import List, Dict, Any, Union
-from types import FunctionType
-from libqtile.core.manager import Qtile
+from typing import List, Dict, Any, Union, Final
+import os
 
 # -----------------------------------------------------
 # SYSTEM SETTINGS - Cài đặt hệ thống
 # -----------------------------------------------------
-MOD = "mod4"  # Windows key
-MOD_ALT = "mod1"  # Alt key
-TERMINAL = "wezterm"
-FILEMANAGER = "thunar"
-APP_LAUNCHER = "rofi -theme ~/.config/qtile/themes/rofi/modern-green-launcher.rasi -show drun -show-icons"
-BROWSER = "firefox"
-EDITOR = "code"
-MUSIC_PLAYER = "spotify"
-GPU_SCREEN_RECORDER = "flatpak run com.dec05eba.gpu_screen_recorder"
+MOD: Final[str] = "mod4"  # Windows key
+MOD_ALT: Final[str] = "mod1"  # Alt key
+TERMINAL: Final[str] = "wezterm"
+FILEMANAGER: Final[str] = "thunar"
+BROWSER: Final[str] = "firefox"
+EDITOR: Final[str] = "code"
+MUSIC_PLAYER: Final[str] = "spotify"
+GPU_SCREEN_RECORDER: Final[str] = "flatpak run com.dec05eba.gpu_screen_recorder"
+
+# Rofi theme path
+_ROFI_THEME_PATH: Final[str] = "~/.config/qtile/themes/rofi/modern-green-launcher.rasi"
+APP_LAUNCHER: Final[str] = f"rofi -theme {_ROFI_THEME_PATH} -show drun -show-icons"
 
 # -----------------------------------------------------
 # APPEARANCE - Cài đặt giao diện
 # -----------------------------------------------------
 # Font settings
-FONT_FAMILY = "CaskaydiaCove Nerd Font Regular"
-FONT_SIZE = 18  # Kích thước font chính
-ICON_SIZE = 32  # Kích thước icon
-ICON_SIZE_SMALL = 28  # Kích thước icon nhỏ
-DEFAULT_FONT = "sans"
-DEFAULT_FONTSIZE = 16
+FONT_FAMILY: Final[str] = "CaskaydiaCove Nerd Font Regular"
+FONT_SIZE: Final[int] = 18  # Kích thước font chính
+ICON_SIZE: Final[int] = 32  # Kích thước icon
+ICON_SIZE_SMALL: Final[int] = 28  # Kích thước icon nhỏ
+DEFAULT_FONT: Final[str] = "sans"
+DEFAULT_FONTSIZE: Final[int] = 16
 
 # Bar settings
-BAR_HEIGHT = 44  # Chiều cao thanh bar
-BAR_MARGIN = [5, 8, 0, 8]  # [Top, Right, Bottom, Left]
-SYSTRAY_ICON_SIZE = 24
+BAR_HEIGHT: Final[int] = 44  # Chiều cao thanh bar
+BAR_MARGIN: Final[List[int]] = [5, 8, 0, 8]  # [Top, Right, Bottom, Left]
+SYSTRAY_ICON_SIZE: Final[int] = 24
 
 # Widget settings
-WIDGET_PADDING = 8  # Padding cho các widget
-WIDGET_PADDING_SMALL = 4  # Padding nhỏ hơn cho một số widget
-WIDGET_PADDING_LARGE = 20  # Padding lớn hơn cho một số widget
-WIDGET_GROUPBOX_FONTSIZE = 20  # Kích thước font cho GroupBox
-WIDGET_SEPARATOR_LINEWIDTH = 1  # Độ rộng của đường phân cách
-WIDGET_UPDATE_INTERVAL = 5.0  # Tần suất cập nhật widget (giây)
-WIDGET_BATTERY_UPDATE_INTERVAL = 30  # Tần suất cập nhật pin (giây)
-WIDGET_MAX_CHARS = 50  # Số ký tự tối đa cho WindowName
+WIDGET_PADDING: Final[int] = 8  # Padding cho các widget
+WIDGET_PADDING_SMALL: Final[int] = 4  # Padding nhỏ hơn cho một số widget
+WIDGET_PADDING_LARGE: Final[int] = 20  # Padding lớn hơn cho một số widget
+WIDGET_GROUPBOX_FONTSIZE: Final[int] = 20  # Kích thước font cho GroupBox
+WIDGET_SEPARATOR_LINEWIDTH: Final[int] = 1  # Độ rộng của đường phân cách
+WIDGET_UPDATE_INTERVAL: Final[float] = 5.0  # Tần suất cập nhật widget (giây)
+WIDGET_BATTERY_UPDATE_INTERVAL: Final[int] = 30  # Tần suất cập nhật pin (giây)
+WIDGET_MAX_CHARS: Final[int] = 50  # Số ký tự tối đa cho WindowName
 
 # Layout settings
 LAYOUT_MARGIN = 12  # Khoảng cách giữa các cửa sổ
@@ -70,43 +72,42 @@ GROUP_LABELS = ["", "", "", "", "", "", "", "", ""]  
 # -----------------------------------------------------
 # PATHS - Đường dẫn
 # -----------------------------------------------------
-# Assets paths
-ASSETS_DIR = "~/.config/qtile/Assets/"
-ICONS_DIR = f"{ASSETS_DIR}Bar-Icons/"
-WALLPAPERS_DIR = "~/.config/qtile/Wallpaper/"
-DEFAULT_WALLPAPER = f"{WALLPAPERS_DIR}bird.jpg"
+# Base directories
+_CONFIG_DIR: Final[str] = "~/.config/qtile"
+ASSETS_DIR: Final[str] = f"{_CONFIG_DIR}/Assets/"
+WALLPAPERS_DIR: Final[str] = f"{_CONFIG_DIR}/Wallpaper/"
+SCRIPTS_DIR: Final[str] = f"{_CONFIG_DIR}/scripts/"
 
-# Scripts paths
-SCRIPTS_DIR = "~/.config/qtile/scripts/"
-POWERMENU_SCRIPT = f"{SCRIPTS_DIR}powermenu.sh"
-UPDATEMENU_SCRIPT = f"{SCRIPTS_DIR}updatemenu.sh"
-KSNIPMENU_SCRIPT = f"{SCRIPTS_DIR}ksnipmenu.sh"
-AUTOSTART_SCRIPT = f"{SCRIPTS_DIR}autostart.sh"
-REDSHIFT_SCRIPT = f"{SCRIPTS_DIR}redshift.sh"
-IBUS_SCRIPT = f"{SCRIPTS_DIR}ibus.sh"
-TOGGLE_CONFIG_SCRIPT = f"{SCRIPTS_DIR}toggle_config.sh"
-PICOM_CONFIG = f"{SCRIPTS_DIR}picom.conf"
+# Specific paths
+ICONS_DIR: Final[str] = f"{ASSETS_DIR}Bar-Icons/"
+DEFAULT_WALLPAPER: Final[str] = f"{WALLPAPERS_DIR}bird.jpg"
+
+# Script paths
+POWERMENU_SCRIPT: Final[str] = f"{SCRIPTS_DIR}powermenu.sh"
+UPDATEMENU_SCRIPT: Final[str] = f"{SCRIPTS_DIR}updatemenu.sh"
+KSNIPMENU_SCRIPT: Final[str] = f"{SCRIPTS_DIR}ksnipmenu.sh"
+AUTOSTART_SCRIPT: Final[str] = f"{SCRIPTS_DIR}autostart.sh"
+REDSHIFT_SCRIPT: Final[str] = f"{SCRIPTS_DIR}redshift.sh"
+IBUS_SCRIPT: Final[str] = f"{SCRIPTS_DIR}ibus.sh"
+TOGGLE_CONFIG_SCRIPT: Final[str] = f"{SCRIPTS_DIR}toggle_config.sh"
+PICOM_CONFIG: Final[str] = f"{SCRIPTS_DIR}picom.conf"
 
 # -----------------------------------------------------
 # MISC - Cài đặt khác
 # -----------------------------------------------------
 # Window manager settings
-FOLLOW_MOUSE_FOCUS = True
-BRING_FRONT_CLICK = True
-CURSOR_WARP = False  # This puts your mouse in the center on the screen after you switch to another workspace
-AUTO_FULLSCREEN = True
-FOCUS_ON_WINDOW_ACTIVATION = "smart"  # or focus
-RECONFIGURE_SCREENS = True
-AUTO_MINIMIZE = True
-WM_NAME = "LG3D"
+FOLLOW_MOUSE_FOCUS: Final[bool] = True
+BRING_FRONT_CLICK: Final[bool] = True
+CURSOR_WARP: Final[bool] = False  # Đưa chuột vào giữa màn hình khi chuyển workspace
+AUTO_FULLSCREEN: Final[bool] = True
+FOCUS_ON_WINDOW_ACTIVATION: Final[str] = "smart"  # Cách thức focus vào cửa sổ
+RECONFIGURE_SCREENS: Final[bool] = True
+AUTO_MINIMIZE: Final[bool] = True
+WM_NAME: Final[str] = "LG3D"
 
 # Redshift settings
-REDSHIFT_TEMP_NIGHT = 4500  # Nhiệt độ màu ban đêm (Kelvin)
-REDSHIFT_TEMP_DAY = 6500  # Nhiệt độ màu ban ngày (Kelvin)
+REDSHIFT_TEMP_NIGHT: Final[int] = 4500  # Nhiệt độ màu ban đêm (Kelvin)
+REDSHIFT_TEMP_DAY: Final[int] = 6500  # Nhiệt độ màu ban ngày (Kelvin)
 
 # Sticky window settings
 STICKY_WINDOWS: List[Any] = []  # Danh sách cửa sổ sticky
-
-
-
-

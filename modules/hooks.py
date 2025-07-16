@@ -6,7 +6,7 @@ Cung cấp các hooks để tự động hóa các tác vụ và xử lý các s
 
 import os
 import subprocess
-from libqtile import hook
+from libqtile import hook, qtile
 
 from modules.settings import STICKY_WINDOWS, AUTOSTART_SCRIPT
 

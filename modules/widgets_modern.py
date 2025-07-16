@@ -5,10 +5,12 @@ Cung cấp các widget với thiết kế hiện đại, tối giản và thốn
 Sử dụng bảng màu từ themes/colors.py.
 """
 
+from typing import List, Dict, Any, Callable, Optional
 from libqtile import widget, qtile
 import subprocess
 import os
 import re
+import logging
 
 from themes.colors import colors
 from modules.settings import (
@@ -17,39 +19,47 @@ from modules.settings import (
     WIDGET_UPDATE_INTERVAL, WIDGET_BATTERY_UPDATE_INTERVAL, WIDGET_MAX_CHARS, SYSTRAY_ICON_SIZE
 )
 
+# Configure logging
+logger = logging.getLogger(__name__)
+
 # Đường dẫn đến thư mục icons
 ICONS_PATH = os.path.expanduser(ICONS_DIR)
 
 # --- Utility functions ---
-def open_launcher():
+def open_launcher() -> None:
     """Mở app launcher."""
     qtile.cmd_spawn(APP_LAUNCHER)
 
-def open_terminal():
+def open_terminal() -> None:
     """Mở terminal."""
     qtile.cmd_spawn(TERMINAL)
 
-def open_btop():
+def open_btop() -> None:
     """Mở btop trong terminal."""
     qtile.cmd_spawn(f"{TERMINAL} --hold -e btop")
 
-def open_powermenu():
+def open_powermenu() -> None:
     """Mở power menu."""
-    script_path = os.path.expanduser(f"{SCRIPTS_DIR}powermenu.sh")
-    subprocess.Popen([script_path])
+    try:
+        script_path = os.path.expanduser(f"{SCRIPTS_DIR}powermenu.sh")
+        subprocess.Popen([script_path])
+    except FileNotFoundError:
+        logger.error(f"Power menu script not found at {script_path}")
+    except Exception as e:
+        logger.error(f"Failed to open power menu: {e}")
 
-def get_backlight_name():
+def get_backlight_name() -> str:
     """Tự động tìm tên thiết bị backlight."""
     try:
         # Lấy danh sách các thiết bị backlight
         backlight_devices = os.listdir('/sys/class/backlight/')
         if backlight_devices:
             return backlight_devices[0]  # Trả về thiết bị đầu tiên tìm thấy
-    except FileNotFoundError:
-        pass
-    return "amdgpu_bl0" # Giá trị dự phòng
+    except (FileNotFoundError, OSError) as e:
+        logger.warning(f"Could not find backlight devices: {e}")
+    return "amdgpu_bl0"  # Giá trị dự phòng
 
-def get_volume_pipewire():
+def get_volume_pipewire() -> str:
     """Lấy thông tin âm lượng từ PipeWire qua pactl."""
     try:
         # Lấy thông tin âm lượng
@@ -59,7 +69,6 @@ def get_volume_pipewire():
         ).strip()
 
         # Parse volume từ output như "Volume: front-left: 32768 /  50% / -18.06 dB"
-        import re
         volume_match = re.search(r'(\d+)%', volume_output)
         volume = volume_match.group(1) if volume_match else "0"
 
@@ -74,13 +83,15 @@ def get_volume_pipewire():
         else:
             return f"{volume}%"
 
-    except subprocess.CalledProcessError:
+    except subprocess.CalledProcessError as e:
+        logger.warning(f"Failed to get volume info: {e}")
         return "N/A"
-    except Exception:
+    except Exception as e:
+        logger.error(f"Unexpected error getting volume: {e}")
         return "Error"
 
 # --- Widget Defaults ---
-def init_widgets_defaults():
+def init_widgets_defaults() -> Dict[str, Any]:
     """Khởi tạo các giá trị mặc định cho widgets."""
     return dict(
         font=FONT_FAMILY,
@@ -92,7 +103,8 @@ def init_widgets_defaults():
 
 # --- Helper functions for creating widget groups ---
 
-def _init_groupbox_widgets():
+def _init_groupbox_widgets() -> List[widget.GroupBox]:
+    """Tạo widget GroupBox với cấu hình hiện đại."""
     return [
         widget.GroupBox(
             font=FONT_FAMILY,
@@ -118,7 +130,8 @@ def _init_groupbox_widgets():
         ),
     ]
 
-def _init_layout_widgets():
+def _init_layout_widgets() -> List[widget.CurrentLayout]:
+    """Tạo widget hiển thị layout hiện tại."""
     return [
         widget.CurrentLayout(
             font=FONT_FAMILY,
@@ -128,7 +141,8 @@ def _init_layout_widgets():
         ),
     ]
 
-def _init_window_name_widget():
+def _init_window_name_widget() -> List[widget.WindowName]:
+    """Tạo widget hiển thị tên cửa sổ hiện tại."""
     return [
         widget.WindowName(
             font=FONT_FAMILY,
@@ -141,14 +155,16 @@ def _init_window_name_widget():
         ),
     ]
 
-def _init_systray_widget():
+def _init_systray_widget() -> List[widget.Systray]:
+    """Tạo widget system tray."""
     return [
         widget.Systray(
             icon_size=SYSTRAY_ICON_SIZE,
         ),
     ]
 
-def _init_system_info_widgets():
+def _init_system_info_widgets() -> List[Any]:
+    """Tạo các widget hiển thị thông tin hệ thống (CPU, RAM)."""
     return [
         widget.TextBox(
             text="󰘚",  # Icon CPU
@@ -180,7 +196,8 @@ def _init_system_info_widgets():
         ),
     ]
 
-def _init_device_status_widgets():
+def _init_device_status_widgets() -> List[Any]:
+    """Tạo các widget hiển thị trạng thái thiết bị (pin, độ sáng, âm lượng)."""
     return [
         widget.TextBox(
             text=" 󰁹",  # Icon Pin

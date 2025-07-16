@@ -1,3 +1,10 @@
+"""
+Cấu hình phím tắt cho Qtile.
+
+Module này định nghĩa tất cả các phím tắt được sử dụng trong Qtile,
+bao gồm điều hướng cửa sổ, launcher, và các chức năng đặc biệt.
+"""
+
 from libqtile.config import Key, KeyChord
 from libqtile.lazy import lazy
 
@@ -8,9 +15,9 @@ from modules.settings import (
 )
 
 
-
 @lazy.function
 def toggle_sticky_windows(qtile, window=None):
+    """Toggle sticky state cho cửa sổ hiện tại."""
     if window is None:
         window = qtile.current_screen.group.current_window
     if window in STICKY_WINDOWS:
@@ -20,8 +27,8 @@ def toggle_sticky_windows(qtile, window=None):
     return window
 
 
-
 def init_keys():
+    """Khởi tạo danh sách phím tắt cho Qtile."""
     keys = [
         # A list of available commands that can be bound to keys can be found
         # at https://docs.qtile.org/en/latest/manual/config/lazy.html
