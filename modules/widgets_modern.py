@@ -5,12 +5,16 @@ Cung cấp các widget với thiết kế hiện đại, tối giản và thốn
 Sử dụng bảng màu từ themes/colors.py.
 """
 
-from typing import List, Dict, Any, Callable, Optional
+from typing import List, Dict, Any, Callable, Optional, TYPE_CHECKING
 from libqtile import widget, qtile
+from libqtile.lazy import lazy
 import subprocess
 import os
 import re
 import logging
+
+if TYPE_CHECKING:
+    from libqtile.core.manager import Qtile
 
 from themes.colors import colors
 from modules.settings import (
@@ -28,15 +32,15 @@ ICONS_PATH = os.path.expanduser(ICONS_DIR)
 # --- Utility functions ---
 def open_launcher() -> None:
     """Mở app launcher."""
-    qtile.cmd_spawn(APP_LAUNCHER)
+    lazy.spawn(APP_LAUNCHER)()
 
 def open_terminal() -> None:
     """Mở terminal."""
-    qtile.cmd_spawn(TERMINAL)
+    lazy.spawn(TERMINAL)()
 
 def open_btop() -> None:
     """Mở btop trong terminal."""
-    qtile.cmd_spawn(f"{TERMINAL} --hold -e btop")
+    lazy.spawn(f"{TERMINAL} --hold -e btop")()
 
 def open_powermenu() -> None:
     """Mở power menu."""
@@ -234,9 +238,9 @@ def _init_device_status_widgets() -> List[Any]:
             func=lambda: get_volume_pipewire(),
             update_interval=1,
             mouse_callbacks={
-                'Button1': lambda: qtile.cmd_spawn("pactl set-sink-mute @DEFAULT_SINK@ toggle"),
-                'Button4': lambda: qtile.cmd_spawn("pactl set-sink-volume @DEFAULT_SINK@ +5%"),
-                'Button5': lambda: qtile.cmd_spawn("pactl set-sink-volume @DEFAULT_SINK@ -5%"),
+                'Button1': lambda: lazy.spawn("pactl set-sink-mute @DEFAULT_SINK@ toggle")(),
+                'Button4': lambda: lazy.spawn("pactl set-sink-volume @DEFAULT_SINK@ +5%")(),
+                'Button5': lambda: lazy.spawn("pactl set-sink-volume @DEFAULT_SINK@ -5%")(),
             },
         ),
         widget.TextBox(
