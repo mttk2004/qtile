@@ -23,7 +23,9 @@ def init_screens():
         "size": BAR_HEIGHT,
         "background": colors["bg"],
         "margin": BAR_MARGIN,  # [Top, Right, Bottom, Left]
-        "border_width": [0, 10, 0, 10],  # [Top, Right, Bottom, Left]
+        "border_width": [0, 10, 0, 6],  # [Top, Right, Bottom, Left]
+        "border_color": colors["bg"],  # Màu viền thanh bar
+        "opacity": .9,  # Độ mờ của thanh bar
     }
 
     # Danh sách màn hình

@@ -174,12 +174,12 @@ def _init_system_info_widgets() -> List[Any]:
             text="󰘚",  # Icon CPU
             foreground=colors["green_primary"],
             fontsize=ICON_SIZE,
+            padding=WIDGET_PADDING,
         ),
         widget.CPU(
             font=FONT_FAMILY,
             format="{load_percent:.0f}%",
             foreground=colors["fg"],
-            padding=WIDGET_PADDING_SMALL,
             update_interval=WIDGET_UPDATE_INTERVAL,
             mouse_callbacks={'Button1': open_btop},
             fontsize=FONT_SIZE,
@@ -207,7 +207,7 @@ def _init_device_status_widgets() -> List[Any]:
             text=" 󰁹",  # Icon Pin
             foreground=colors["green_primary"],
             fontsize=ICON_SIZE_SMALL,
-            padding=WIDGET_PADDING,
+            padding=WIDGET_PADDING_SMALL,
         ),
         widget.Battery(
             font=FONT_FAMILY,
@@ -227,6 +227,7 @@ def _init_device_status_widgets() -> List[Any]:
             text=" 󰕾",  # Icon Volume
             foreground=colors["green_primary"],
             fontsize=ICON_SIZE,
+            padding=WIDGET_PADDING
         ),
         # Widget Volume tùy chỉnh cho PipeWire
         # Click chuột trái: toggle mute
@@ -246,7 +247,8 @@ def _init_device_status_widgets() -> List[Any]:
         widget.TextBox(
             text=" 󰃠",  # Icon Brightness
             foreground=colors["green_primary"],
-            fontsize=ICON_SIZE,
+            fontsize=ICON_SIZE_SMALL,
+            padding=WIDGET_PADDING,
         ),
         widget.Backlight(
             backlight_name=get_backlight_name(),
@@ -264,7 +266,8 @@ def _init_clock_widgets():
         widget.TextBox(
             text=" 󰸗",  # Icon Calendar
             foreground=colors["green_primary"],
-            fontsize=ICON_SIZE,
+            fontsize=ICON_SIZE_SMALL,
+            padding=WIDGET_PADDING,
         ),
         widget.Clock(
             font=FONT_FAMILY,
@@ -275,7 +278,8 @@ def _init_clock_widgets():
         widget.TextBox(
             text=" 󰥔",  # Icon Clock
             foreground=colors["green_primary"],
-            fontsize=ICON_SIZE,
+            fontsize=ICON_SIZE_SMALL,
+            padding=WIDGET_PADDING,
         ),
         widget.Clock(
             font=FONT_FAMILY,
@@ -290,8 +294,9 @@ def _init_power_widget():
         widget.TextBox(
             text="⏻",  # Icon Power
             foreground=colors["error"],
-            fontsize=ICON_SIZE,
+            fontsize=ICON_SIZE_SMALL,
             mouse_callbacks={'Button1': open_powermenu},
+            padding=WIDGET_PADDING,
         ),
     ]
 

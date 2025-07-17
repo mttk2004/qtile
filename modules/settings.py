@@ -30,8 +30,8 @@ APP_LAUNCHER: Final[str] = f"rofi -theme {_ROFI_THEME_PATH} -show drun -show-ico
 # Font settings
 FONT_FAMILY: Final[str] = "CaskaydiaCove Nerd Font Regular"
 FONT_SIZE: Final[int] = 18  # Kích thước font chính
-ICON_SIZE: Final[int] = 32  # Kích thước icon
-ICON_SIZE_SMALL: Final[int] = 28  # Kích thước icon nhỏ
+ICON_SIZE: Final[int] = 24  # Kích thước icon
+ICON_SIZE_SMALL: Final[int] = 20  # Kích thước icon nhỏ
 DEFAULT_FONT: Final[str] = "sans"
 DEFAULT_FONTSIZE: Final[int] = 16
 
