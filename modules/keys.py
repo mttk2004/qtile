@@ -113,4 +113,8 @@ def init_keys():
         Key([MOD], "F10", lazy.group['scratchpad'].dropdown_toggle('monitor'), desc="Toggle scratchpad system monitor"),
     ])
 
+    keys.extend([
+        Key([MOD], "b", lazy.hide_show_bar(), desc="Toggle status bar"),
+    ])
+
     return keys
