@@ -51,7 +51,7 @@ WIDGET_BATTERY_UPDATE_INTERVAL: Final[int] = 30  # Tần suất cập nhật pin
 WIDGET_MAX_CHARS: Final[int] = 50  # Số ký tự tối đa cho WindowName
 
 # Layout settings
-LAYOUT_MARGIN = 12  # Khoảng cách giữa các cửa sổ
+LAYOUT_MARGIN = 10  # Khoảng cách giữa các cửa sổ
 LAYOUT_BORDER_WIDTH = 2  # Độ rộng viền cửa sổ
 LAYOUT_RATIO = 0.6  # Tỷ lệ cửa sổ chính trong MonadTall/MonadWide
 LAYOUT_MIN_RATIO = 0.30  # Tỷ lệ tối thiểu
